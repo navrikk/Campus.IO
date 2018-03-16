@@ -1,0 +1,29 @@
+<% include partials/header %>
+
+<div class="container">
+	<form class="col-md-6 col-md-offset-3" action="/register" method="POST">
+		<legend>Create a new account</legend>
+		<div class="form-group">
+			<label for="username">USN</label>
+			<input class="form-control" type="text"	name="username" id="username" autofocus>
+		</div>
+		<div class="form-group">
+			<label for="email">E-mail</label>
+			<input class="form-control" type="email" name="email" id="email">
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input class="form-control" type="password"	name="password" id="password">
+		</div>
+		<div class="form-group">
+			<label for="confirmPassword">Re-enter Password</label>
+			<input class="form-control" type="password"	name="confirmPassword" id="confirmPassword">
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit">Submit</button>
+			<a class="pull-right" href="/login">Existing user? Sign In.</a>
+		</div>
+	</form>
+</div>
+
+<% include partials/footer %>

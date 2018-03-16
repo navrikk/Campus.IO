@@ -1,0 +1,8 @@
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+.navbar {
+	box-shadow: 3px 8px 15px #888888;
+	border-radius: none;
+}
