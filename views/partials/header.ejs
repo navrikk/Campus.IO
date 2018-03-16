@@ -3,16 +3,17 @@
 	<head>
 		<!-- required meta tags -->
 		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Bootstrap CSS v4.0.0 -->
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 	    <!-- Font Awesome CSS v5.0.8 -->
 	    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
 		<!-- Google Fonts - Lato -->
-		<link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 		<!-- Custom stylesheet -->
 		<link rel="stylesheet" type="text/css" href="/styles/style.css">
@@ -21,60 +22,49 @@
 	</head>
 	<body>
 		
-		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<div class="container">
-				<!-- brand -->
-				<span class="navbar-brand mb-0 h1">CAMPUS.IO</span>
-				<!-- navbar toggle -->
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navbar">
+				<% if (currentUser) { %>
+					<span class="navbar-brand">
+						<i class="fas fa-graduation-cap"></i> CAMPUS.IO
+					</span>
+				<% } else { %>
+					<a class="navbar-brand" href="/">
+						<i class="fas fa-graduation-cap"></i> CAMPUS.IO
+					</a>
+				<% } %>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<!-- navbar toggle target -->
-				<div class="collapse navbar-collapse" id="navbarToggle">
+				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav mr-auto">
 						<% if (currentUser) { %>
-							<li class="nav-item">
-								<a class="nav-link" href="/home">HOME</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="/home">HOME</a></li>
 						<% } %>
 					</ul>
 					<ul class="navbar-nav ml-auto">
-						<% if (!currentUser) { %>
-							<li class="nav-item">
-								<a class="nav-link" href="/register">
-									<i class="fas fa-user-plus"></i> SIGN UP
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/login">
-									<i class="fas fa-sign-in-alt"></i> SIGN IN
-								</a>
-							</li>
-						<% } else { %>
-							<li class="nav-item">
-								<a class="nav-link" href="#"><%= currentUser.username %></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/logout">
-									<i class="fas fa-sign-out-alt"></i> LOGOUT
-								</a>
-							</li>
+						<% if (currentUser) { %>
+							<li class="nav-item"><a class="nav-link" href="#"><%= currentUser.username %></a></li>
+							<li class="nav-item"><a class="nav-link" href="/logout">LOGOUT</a></li>
 						<% } %>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
-		<!-- <p style="min-height: 100px;"></p> -->
+		<p style="height: 60px;"></p>
+
 
 		<div class="container">
 		    <% if(error && error.length > 0) { %>
-		    	<div class="alert alert-danger" role="alert">
+		    	<div class="alert alert-danger alert-dismissible text-center" role="alert">
+		    		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		    		<p><%=error %></p>
 		    	</div>
 		    <% } %>
 		    <% if(success && success.length > 0) { %>
-		    	<div class="alert alert-success" role="alert">
+		    	<div class="alert alert-success alert-dismissible text-center" role="alert">
+		    		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		    		<p><%= success %></p>
 		    	</div>
 		    <% } %>

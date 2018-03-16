@@ -1,7 +1,11 @@
 <% include partials/header %>
 
 <div class="container">
-	<form class="col-md-6 col-md-offset-3" action="/reset/<%= token %>" method="POST">
+	<form class="col-md-6 offset-md-3" action="/reset/<%= token %>" method="POST">
+		<div class="text-center">
+			<i class="fas fa-graduation-cap fa-3x"></i><br>
+			<span>CAMPUS.IO</span><br><br>
+		</div>
 		<legend>Reset Password</legend>
 		<div class="form-group">
 			<label for="password">New Password</label>

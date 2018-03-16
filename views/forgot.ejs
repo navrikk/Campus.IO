@@ -1,7 +1,11 @@
 <% include partials/header %>
 
 <div class="container">
-	<form class="col-md-6 col-md-offset-3" action="/forgot" method="POST">
+	<form class="col-md-6 offset-md-3" action="/forgot" method="POST">
+		<div class="text-center">
+			<i class="fas fa-graduation-cap fa-3x"></i><br>
+			<span>CAMPUS.IO</span><br><br>
+		</div>
 		<legend>Forgot Password</legend>
 		<div class="form-group">
 			<label for="email">Enter your email</label>
@@ -9,6 +13,7 @@
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary">Reset Password</button>
+			<a class="float-right" href="/login">Go back</a>
 		</div>
 	</form>		
 </div>
