@@ -16,7 +16,8 @@ var port		=	process.env.PORT || 4000;
 var User 		=	require('./models/user');
 
 // requiring routes
-var indexRoutes	=	require('./routes/index');
+var indexRoutes	=	require('./routes/index'),
+	userRoutes  = 	require('./routes/user');
 
 // mongodb connection
 mongoose.connect('mongodb://localhost/campus_io');
@@ -56,6 +57,7 @@ app.use(function(req, res, next) {
 
 // using required routes
 app.use('/', indexRoutes);
+app.use('/user/', userRoutes);
 
 
 // deployment

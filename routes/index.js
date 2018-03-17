@@ -42,7 +42,7 @@ router.post('/register', function(req, res) {
 			}
 			passport.authenticate('local')(req, res, function() {
 				req.flash('success', 'Welcome here, ' + user.firstname + '.');
-				res.redirect('/home');
+				res.redirect('/user/home');
 			});
 		});
 	} else {
@@ -72,18 +72,17 @@ router.post('/login', function(req, res, next) {
 		 		return next(err); 
 		 	}
 		 	req.flash('success', 'Welcome back, ' + user.firstname);
-		  	return res.redirect('/home');
+		  	return res.redirect('/user/home');
 		});
 	})(req, res, next);
 });
-
 
 
 // logout route
 router.get('/logout', function(req, res) {
 	req.logout();
 	req.flash('success', 'Successfully logged out.');
-	res.redirect('/');
+	res.redirect('/login');
 });
 
 // render the forgot page
@@ -202,13 +201,9 @@ router.post('/reset/:token', function(req, res) {
 		}	
 	],
 	function(err) {
-		res.redirect('/home');
+		res.redirect('/user/home');
 	});
 });
 
-// render the home page
-router.get('/home', middleware.isLoggedIn, function(req, res) {
-	res.render('home');
-});
 
 module.exports	=	router;
