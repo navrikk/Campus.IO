@@ -8,4 +8,9 @@ middlewareObj.isLoggedIn = function(req, res, next) {
 	res.redirect('/login');
 }
 
+middlewareObj.usernameToUpperCase = function(req, res, next) {
+	req.body.username = req.body.username.toUpperCase();
+	next();
+}
+
 module.exports = middlewareObj;

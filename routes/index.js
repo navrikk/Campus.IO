@@ -19,9 +19,8 @@ router.get('/register', function(req, res) {
 });
 
 // handle the register logic
-router.post('/register', function(req, res) {
+router.post('/register', middleware.usernameToUpperCase, function(req, res) {
 	//Form validation - limiting USN size
-	req.body.username = req.body.username.toUpperCase();
 	var usnPattern = /^[1-4][A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/;
 	if (!req.body.username.match(usnPattern) || req.body.username === 0) {
 		req.flash('error', 'Invalid USN');
@@ -41,8 +40,27 @@ router.post('/register', function(req, res) {
 				return res.redirect('register');
 			}
 			passport.authenticate('local')(req, res, function() {
-				req.flash('success', 'Welcome here, ' + user.firstname + '.');
-				res.redirect('/user/home');
+				// req.flash('success', 'Welcome here, ' + user.firstname + '.');
+				// res.redirect('/user/home');
+				// welcome e-mail to user mail address
+				var smtpTransport = nodemailer.createTransport({
+					service: 'Gmail',
+					auth: {
+						user: 'campus.io.mailer@gmail.com',
+						pass: 'password goes here'
+					}
+				});
+				var mailOptions = {
+					to: user.email,
+					from: 'campus.io.mailer@gmail.com',
+					subject: 'Welcome to CAMPUS.IO',
+					text: 'Hello, '+ user.firstname + '\n\n' +
+						  'We would like to both confirm and thank you for successfully creating an account at CAMPUS.IO'
+				};
+				smtpTransport.sendMail(mailOptions, function(err) {
+					req.flash('success', 'Welcome here, ' + user.firstname + '.');
+					res.redirect('/user/home');
+				});
 			});
 		});
 	} else {
@@ -57,7 +75,7 @@ router.get('/login', function(req, res) {
 });
 
 // handle login logic
-router.post('/login', function(req, res, next) {
+router.post('/login', middleware.usernameToUpperCase, function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) { 
 			req.flash('error', err.message);
