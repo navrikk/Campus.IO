@@ -21,13 +21,17 @@ router.get('/register', function(req, res) {
 // handle the register logic
 router.post('/register', function(req, res) {
 	//Form validation - limiting USN size
-	if(req.body.username.length != 10) {
+	req.body.username = req.body.username.toUpperCase();
+	var usnPattern = /^[1-4][A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/;
+	if (!req.body.username.match(usnPattern) || req.body.username === 0) {
 		req.flash('error', 'Invalid USN');
 		return res.redirect('/register');
 	}
 	//Form validation - confirming password
 	if(req.body.password === req.body.confirmPassword) {
 		var newUser = new User({
+			firstname: req.body.fname,
+			lastname: req.body.lname,
 			username: req.body.username,
 			email: req.body.email
 		});
@@ -37,7 +41,7 @@ router.post('/register', function(req, res) {
 				return res.redirect('register');
 			}
 			passport.authenticate('local')(req, res, function() {
-				req.flash('success', 'Welcome here, ' + user.username + '.');
+				req.flash('success', 'Welcome here, ' + user.firstname + '.');
 				res.redirect('/home');
 			});
 		});
@@ -67,7 +71,7 @@ router.post('/login', function(req, res, next) {
 		 	if (err) { 
 		 		return next(err); 
 		 	}
-		 	req.flash('success', 'Welcome back, ' + user.username);
+		 	req.flash('success', 'Welcome back, ' + user.firstname);
 		  	return res.redirect('/home');
 		});
 	})(req, res, next);
@@ -122,7 +126,7 @@ router.post('/forgot', function(req, res, next) {
 			var mailOptions = {
 				to: user.email,
 				from: 'campus.io.mailer@gmail.com',
-				subject: 'CAMPUS.IO Password Reset',
+				subject: 'CAMPUS.IO Password Reset Request',
 				text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account at CAMPUS.IO.\n\n' +
 				'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
 				'http://' + req.headers.host + '/reset/' + token + '\n\n' +
@@ -187,7 +191,7 @@ router.post('/reset/:token', function(req, res) {
 			var mailOptions = {
 				to: user.email,
 				from: 'campus.io.mailer@gmail.com',
-				subject: 'Your password has been changed',
+				subject: 'Your CAMPUS.IO account password has been changed',
 				text: 'Hello,\n\n' +
 					  'This is a confirmation that the password for your account at CAMPUS.IO has just been changed.'
 			};
