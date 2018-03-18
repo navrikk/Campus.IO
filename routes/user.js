@@ -12,7 +12,14 @@ router.get('/home', middleware.isLoggedIn, function(req, res) {
 
 // render the profile page
 router.get('/:id', middleware.isLoggedIn, function(req, res) {
-	res.render('user/profile');
+	User.findById(req.params.id, function(err, foundUser) {
+		if (err) {
+			req.flash('error', 'Profile does not exist.');
+			res.redirect('/user/home');
+		} else {
+			res.render('user/profile', {user: foundUser});
+		}
+	});
 });
 
 module.exports 	=	router;

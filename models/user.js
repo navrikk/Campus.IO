@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema({
 	lastname: {type: String, required: true},
 	username: {type: String, required: true, unique: true},
 	email: {type: String, required: true, unique: true},
+	avatar: {type: String, default: 'https://www.drupal.org/files/profile_default.png'},
 	password: String,
 	resetPasswordToken: String,
 	resetPasswordExpires: Date,
