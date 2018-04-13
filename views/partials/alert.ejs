@@ -1,0 +1,16 @@
+<p style="margin-top: 4em;"></p>
+
+<div class="container">
+	<% if(error && error.length > 0) { %>
+		<div class="alert alert-danger alert-dismissible text-center" role="alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong><%=error %></strong>
+		</div>
+	<% } %>
+	<% if(success && success.length > 0) { %>
+		<div class="alert alert-success alert-dismissible text-center" role="alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong><%= success %></strong>
+		</div>
+	<% } %>
+</div>

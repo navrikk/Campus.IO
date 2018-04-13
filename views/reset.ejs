@@ -1,6 +1,7 @@
 <% include partials/header %>
+<% include partials/alert %>
 
-<div class="container">
+<div class="container" id="myForm">
 	<form class="col-md-4 offset-md-4" action="/reset/<%= token %>" method="POST">
 		<div class="text-center">
 			<i class="fas fa-graduation-cap fa-3x"></i><br>
