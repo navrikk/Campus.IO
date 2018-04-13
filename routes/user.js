@@ -10,6 +10,11 @@ router.get('/home', middleware.isLoggedIn, function(req, res) {
 	res.render('user/home');
 });
 
+// render the chatroom page
+router.get('/chatroom', middleware.isLoggedIn, function(req, res) {
+	res.render('user/chatroom');
+});
+
 // render the profile page
 router.get('/:id', middleware.isLoggedIn, function(req, res) {
 	User.findById(req.params.id, function(err, foundUser) {
