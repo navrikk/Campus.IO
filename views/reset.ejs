@@ -1,11 +1,13 @@
 <% include partials/header %>
 <% include partials/alert %>
 
-<div class="container" id="myForm">
-	<form class="col-md-4 offset-md-4" action="/reset/<%= token %>" method="POST">
+<div class="container">
+	<form class="col-md-4 offset-md-4" id="myForm" action="/reset/<%= token %>" method="POST">
 		<div class="text-center">
-			<i class="fas fa-graduation-cap fa-3x"></i><br>
-			<span>CAMPUS.IO</span><br><br>
+			<a href="/" id="homeLogo">
+				<i class="fas fa-graduation-cap fa-3x"></i><br>
+				<span>CAMPUS.IO</span><br><br>
+			</a>
 		</div>
 		<legend>Reset Password</legend>
 		<div class="form-group">

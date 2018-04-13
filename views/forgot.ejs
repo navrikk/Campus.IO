@@ -2,10 +2,12 @@
 <% include partials/alert %>
 
 <div class="container">
-	<form class="col-md-4 offset-md-4" action="/forgot" method="POST">
+	<form class="col-md-4 offset-md-4" id="myForm" action="/forgot" method="POST">
 		<div class="text-center">
-			<i class="fas fa-graduation-cap fa-3x"></i><br>
-			<span>CAMPUS.IO</span><br><br>
+			<a href="/" id="homeLogo">
+				<i class="fas fa-graduation-cap fa-3x"></i><br>
+				<span>CAMPUS.IO</span><br><br>
+			</a>
 		</div>
 		<legend>Forgot Password</legend>
 		<div class="form-group">

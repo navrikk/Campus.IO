@@ -6,3 +6,17 @@ body {
 a:hover {
 	text-decoration: none;
 }
+
+#myForm {
+	background-color: #c2c2c2;
+	border-radius: 15px;
+	padding: 15px; 
+}
+
+#homeLogo {
+	color: #222222;
+}
+
+#homeLogo:hover {
+	color: #000000;
+}
