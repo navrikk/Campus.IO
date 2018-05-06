@@ -8,7 +8,6 @@ var express 			= 	require('express'),
 	methodOverride		= 	require('method-override'),
 	flash				=	require('connect-flash');
 
-
 // port configuration
 var port		=	process.env.PORT || 4000;
 

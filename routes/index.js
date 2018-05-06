@@ -40,8 +40,6 @@ router.post('/register', middleware.usernameToUpperCase, function(req, res) {
 				return res.redirect('register');
 			}
 			passport.authenticate('local')(req, res, function() {
-				// req.flash('success', 'Welcome here, ' + user.firstname + '.');
-				// res.redirect('/user/home');
 				// welcome e-mail to user mail address
 				var smtpTransport = nodemailer.createTransport({
 					service: 'Gmail',
