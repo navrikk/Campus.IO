@@ -37,20 +37,22 @@
 				</small>
 			</div>
 		</div>
-		<big>I am a</big> <br>
-		<div class="btn-group" data-toggle="buttons">
-			<label class="btn btn-purple btn-rounded active btn-md form-check-label">
-				<input class="form-check-input" type="radio" checked name="student">
-					<big>
-					Student
-				</big>
-			</label>
-			<label class="btn btn-purple btn-rounded btn-md form-check-label">
-				<input class="form-check-input" type="radio" name="teacher">
-					<big>
-						Teacher
-					</big>
-			</label>
+		<div class="form-row">
+			<big>I am a </big>
+		</div>
+		<div class="form-check form-check-inline">
+			<big>
+				<label class="form-check-label">
+					<input class="form-check-input" type="radio" name="radioOption" id="student" value="student" onclick="hideSupportDetails();" checked=""> Student
+				</label>
+			</big>
+		</div>
+		<div class="form-check form-check-inline">
+			<big>
+				<label class="form-check-label">
+					<input class="form-check-input" type="radio" name="radioOption" id="support" value="support" onclick="showSupportDetails();"> Support
+				</label>
+			</big>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-4">
@@ -68,11 +70,11 @@
 				</small>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="supportDetails" hidden="">
 			<div class="form-group col-md-6">
 				<label for="branch">Branch</label>
 				<select class="form-control" name="branch" form="myForm">
-					<option>Select a branch</option>
+					<option>Select branch</option>
 					<option value="CSE">CSE</option>
 					<option value="ISE">ISE</option>
 					<option value="ECE">ECE</option>

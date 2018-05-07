@@ -4,6 +4,10 @@ $(document).ready(function () {
 	}, 3000);
 });
 
-function showTeacherRegistrationDetails() {
-	document.getElementById()
+function showSupportDetails() {
+	$("#supportDetails").attr("hidden", false);
+}
+
+function hideSupportDetails() {
+	$("#supportDetails").attr("hidden", true);
 }
