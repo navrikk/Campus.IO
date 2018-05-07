@@ -37,6 +37,7 @@ i {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	filter: blur(3px);
 }
 
 .slideshow li { 
@@ -54,23 +55,23 @@ i {
 }
 
 .slideshow li:nth-child(1) { 
-	background-image: url(https://images6.alphacoders.com/438/thumb-1920-438947.jpg); 
+	background-image: url(https://images.unsplash.com/photo-1523624380983-bb4212fa8086?ixlib=rb-0.3.5&s=f1ed1e4fd43ba3c3cc9356dd26af35a4&auto=format&fit=crop&w=750&q=80);
 }
 .slideshow li:nth-child(2) { 
-	background-image: url(https://images.unsplash.com/photo-1505473478993-e61136811cc4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e6ddd5f8cc9cc9491bbcecfd3147d502&auto=format&fit=crop&w=750&q=80);
-	animation-delay: 10s; 
+	background-image: url(https://images.unsplash.com/photo-1492931307820-62fa5a68e0df?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a8e0cd065fc2c6b25a500c0103211b&auto=format&fit=crop&w=750&q=80);
+	animation-delay: 5s; 
 }
 .slideshow li:nth-child(3) { 
-	background-image: url(https://images.unsplash.com/reserve/jsygaVpSPKes2SCJeihQ_EM2C5950.jpg?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b02cc6a055b01ec55605ce18ee53f5d4&auto=format&fit=crop&w=750&q=80);
-	animation-delay: 20s; 
+	background-image: url(https://images.unsplash.com/photo-1483638994033-15b73fe7af18?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1bcf8222b3bc5a4f787a6263ad46ef15&auto=format&fit=crop&w=500&q=80);
+	animation-delay: 10s; 
 }
 .slideshow li:nth-child(4) { 
-	background-image: url(https://images.unsplash.com/photo-1483304528321-0674f0040030?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a658ae60843537b1b88478c56f783669&auto=format&fit=crop&w=1500&q=80);
-	animation-delay: 30s; 
+	background-image: url(https://images.unsplash.com/photo-1485135388033-a6d9fa695a3a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a5f79deba98e1f96ee7ffa977bc04f24&auto=format&fit=crop&w=750&q=80);
+	animation-delay: 20s; 
 }
 .slideshow li:nth-child(5) { 
-	background-image: url(https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5a31d03ddee66863a599421f792e07b&auto=format&fit=crop&w=750&q=80);
-	animation-delay: 40s; 
+	background-image: url(https://images.unsplash.com/photo-1523958908396-f839acfb2b38?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7342a9a26aedaecb442ca25edacf7243&auto=format&fit=crop&w=750&q=80); 
+	animation-delay: 30s; 
 }
 
 @keyframes imageAnimation { 

@@ -1,5 +1,16 @@
 <% include partials/header %>
+
+<link rel="stylesheet" type="text/css" href="/styles/landing.css">
+
 <% include partials/alert %>
+
+<ul class="slideshow">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
 
 <div class="container">
 	<form class="col-md-4 offset-md-4" id="myForm" action="/reset/<%= token %>" method="POST">

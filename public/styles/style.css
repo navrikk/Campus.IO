@@ -8,9 +8,9 @@ a:hover {
 }
 
 #myForm {
-	background-color: #c2c2c2;
+	background-color: rgba(161, 161, 161, 0.75);
 	border-radius: 15px;
-	padding: 15px; 
+	padding: 15px;
 }
 
 #homeLogo {
@@ -19,4 +19,9 @@ a:hover {
 
 #homeLogo:hover {
 	color: #000000;
+}
+
+#alertWindow {
+	position: absolute;
+	z-index: 1;
 }

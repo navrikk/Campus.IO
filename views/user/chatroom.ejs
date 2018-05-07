@@ -1,7 +1,57 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
+     
+	<style type="text/css">
+
+		#messages { 
+			list-style-type: none; 
+			margin: 0; 
+			padding: 0; 
+		}
+
+	    #messages li { 
+	    	padding: 10px 15px; 
+	    }
+
+	    #messages li:nth-child(odd) { 
+	    	background: #eee; 
+	    }
+
+	    #messageBox {
+	    	padding-top: 20px;
+	    }
+
+	</style>
+
 <% include ../partials/alert %>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+	<div class="container">
+		
+		<ul id="messages" class="card" style="min-height: 450px;"></ul>
+		<form id="messageBox" action="" method="">
+			<textarea id="m" class="col-md-10" rows="4"></textarea>
+			<button class="btn btn-success col-md-1 offset-1 float-right" style="height: 102px;">Send</button>
+		</form>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+		
+		<script>
+			$(function () {
+				var socket = io();
+				$('form').submit(function() {
+					socket.emit('chat message', $('#m').val());
+					$('#m').val('');
+					return false;
+				});
+				socket.on('chat message', function(msg) {
+					if (msg != '') {
+						$('#messages').append($('<li>').text(msg));
+					}
+				});
+			});
+		</script>
+
+	</div>
 
 <% include ../partials/footer %>

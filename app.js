@@ -6,7 +6,9 @@ var express 			= 	require('express'),
 	passport			= 	require('passport'),
 	LocalStrategy 		= 	require('passport-local'),
 	methodOverride		= 	require('method-override'),
-	flash				=	require('connect-flash');
+	flash				=	require('connect-flash'),
+	http				=	require('http').Server(app),
+	io 					=	require('socket.io')(http);
 
 // port configuration
 var port		=	process.env.PORT || 4000;
@@ -59,7 +61,14 @@ app.use('/', indexRoutes);
 app.use('/user/', userRoutes);
 
 
+// socket.io connection
+io.on('connection', function(socket) {
+	socket.on('chat message', function(msg) {
+    	io.emit('chat message', msg);
+  	});
+});
+
 // deployment
-app.listen(port, function() {
+http.listen(port, function() {
 	console.log('Server online at port ' + port);
 });
