@@ -22,18 +22,35 @@ router.get('/register', function(req, res) {
 router.post('/register', middleware.usernameToUpperCase, function(req, res) {
 	//Form validation - limiting USN size
 	var usnPattern = /^[1-4][A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/;
-	if (!req.body.username.match(usnPattern) || req.body.username === 0) {
-		req.flash('error', 'Invalid USN');
-		return res.redirect('/register');
-	}
-	//Form validation - confirming password
-	if(req.body.password === req.body.confirmPassword) {
-		var newUser = new User({
+	var newUser;
+	if (req.body.radioOption === 'student') {
+		if (!req.body.username.match(usnPattern) || req.body.username.length === 0) {
+			req.flash('error', 'Invalid USN');
+			return res.redirect('/register');
+		}
+		newUser = new User({
 			firstname: req.body.fname,
 			lastname: req.body.lname,
 			username: req.body.username,
 			email: req.body.email
 		});
+	} else {
+		if (req.body.username.match(usnPattern) || req.body.username.length === 0) {
+			req.flash('error', 'Invalid username');
+			return res.redirect('/register');
+		}
+		newUser = new User({
+			firstname: req.body.fname,
+			lastname: req.body.lname,
+			username: req.body.username,
+			email: req.body.email,
+			branch: req.body.branch,
+			college: req.body.college,
+			isSupport: true
+		});
+	}
+	//Form validation - confirming password
+	if(req.body.password === req.body.confirmPassword) {
 		User.register(newUser, req.body.password, function(err, user) {
 			if(err) {
 				req.flash('error', err.message);
