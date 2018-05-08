@@ -29,8 +29,9 @@
 		
 		<ul id="messages" class="card" style="min-height: 450px;"></ul>
 		<form id="messageBox" action="" method="">
-			<textarea id="m" class="col-md-10" rows="4"></textarea>
-			<button class="btn btn-success col-md-1 offset-1 float-right" style="height: 102px;">Send</button>
+			<input type="text" id="myName" value="<%= currentUser.firstname %>" hidden="">
+			<textarea id="myMessage" class="col-md-10" rows="4"></textarea>
+			<button class="btn btn-success col-md-1 float-right" style="height: 102px;">Send</button>
 		</form>
 
 		<script src="/socket.io/socket.io.js"></script>
@@ -40,8 +41,14 @@
 			$(function () {
 				var socket = io();
 				$('form').submit(function() {
-					socket.emit('chat message', $('#m').val());
-					$('#m').val('');
+					var displayMessage;
+					/*if (currentUser.isSupport === true) 
+						displayMessage = $('#myName').val() + ' (Support): ' + $('#myMessage').val();
+					} else {*/
+						displayMessage = $('#myName').val() + ': ' + $('#myMessage').val();
+					// }
+					socket.emit('chat message', displayMessage);
+					$('#myMessage').val('');
 					return false;
 				});
 				socket.on('chat message', function(msg) {
