@@ -29,7 +29,11 @@
 		
 		<ul id="messages" class="card" style="min-height: 450px;"></ul>
 		<form id="messageBox" action="" method="">
-			<input type="text" id="myName" value="<%= currentUser.firstname %>" hidden="">
+			<% if (currentUser.isSupport === true) { %>
+				<input type="text" id="myName" value="<%= currentUser.firstname %> (Support)" hidden="">
+			<% } else { %>
+				<input type="text" id="myName" value="<%= currentUser.firstname %>" hidden="">
+			<% } %>
 			<textarea id="myMessage" class="col-md-10" rows="4"></textarea>
 			<button class="btn btn-success col-md-1 float-right" style="height: 102px;">Send</button>
 		</form>
@@ -42,6 +46,7 @@
 				var socket = io();
 				$('form').submit(function() {
 					var displayMessage;
+					// alert(currentUser.isSupport);
 					/*if (currentUser.isSupport === true) 
 						displayMessage = $('#myName').val() + ' (Support): ' + $('#myMessage').val();
 					} else {*/
