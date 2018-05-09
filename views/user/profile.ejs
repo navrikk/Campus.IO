@@ -12,6 +12,9 @@
 		<%	}	%>
 		<h4><%= user.email %></h4>
 		<h4><%= user.branch %>, <%= user.college %></h4>
+		<% if (currentUser.username === user.username) { %>
+			<a href="/user/<%= user._id %>/edit">Edit Profile</a>
+		<% } %>
 	</div>
 </div>
 

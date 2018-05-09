@@ -27,4 +27,30 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
 	});
 });
 
+// render the edit profile page
+router.get('/:id/edit', middleware.isLoggedIn, function(req, res) {
+	User.findById(req.params.id, function(err, foundUser) {
+		if (err) {
+			req.flash('error', 'You do not have privileges to do that.');
+			res.redirect('/user/home');
+		} else {
+			res.render('user/edit', {user: foundUser});
+		}
+	});
+});
+
+// handle the logic for edit profile
+router.put('/:id', middleware.isLoggedIn, function(req, res) {
+	User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser) {
+		if(err) {
+			console.log(err);
+			req.flash('error', 'Something went wrong. Please try again.');
+			res.redirect('/user/home');
+		} else {
+			req.flash('success', 'Successfully updated.');
+			res.redirect('/user/' + updatedUser._id);
+		}
+	});
+});
+
 module.exports 	=	router;
