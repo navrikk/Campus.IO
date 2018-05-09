@@ -1,36 +1,19 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
-     
-	<style type="text/css">
-
-		#messages { 
-			list-style-type: none; 
-			margin: 0; 
-			padding: 0; 
-		}
-
-	    #messages li { 
-	    	padding: 10px 15px; 
-	    }
-
-	    #messages li:nth-child(odd) { 
-	    	background: #eee; 
-	    }
-
-	    #messageBox {
-	    	padding-top: 20px;
-	    }
-
-	</style>
-
 <% include ../partials/alert %>
 
-	<div class="container">
+	<div class="container" id="chatWindow">
 		
-		<ul id="messages" class="card" style="min-height: 450px;"></ul>
+		<ul id="messages" class="card">
+			<% chats.forEach(function(chat) { %>
+				<% if (!(chat.message === '')) { %>
+					<li><%= chat.message %></li>
+				<% } %>
+			<% }); %>
+		</ul>
 		<form id="messageBox" action="" method="">
 			<% if (currentUser.isSupport === true) { %>
-				<input type="text" id="myName" value="<%= currentUser.firstname %> (Support)" hidden="">
+				<input type="text" id="myName" value="<%= currentUser.firstname %> &#9733;" hidden="">
 			<% } else { %>
 				<input type="text" id="myName" value="<%= currentUser.firstname %>" hidden="">
 			<% } %>
@@ -42,17 +25,12 @@
 		<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		
 		<script>
-			$(function () {
+			$(() => {
 				var socket = io();
 				$('form').submit(function() {
-					var displayMessage;
-					// alert(currentUser.isSupport);
-					/*if (currentUser.isSupport === true) 
-						displayMessage = $('#myName').val() + ' (Support): ' + $('#myMessage').val();
-					} else {*/
-						displayMessage = $('#myName').val() + ': ' + $('#myMessage').val();
-					// }
+					var displayMessage = $('#myName').val() + ': ' + $('#myMessage').val();
 					socket.emit('chat message', displayMessage);
+					saveChat(displayMessage);
 					$('#myMessage').val('');
 					return false;
 				});
@@ -62,6 +40,9 @@
 					}
 				});
 			});
+			function saveChat(chatMessage) {
+				$.post(document.URL, {message: chatMessage});
+			}
 		</script>
 
 	</div>

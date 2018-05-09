@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="/styles/landing.css">
 
+<% include ../partials/navbar %>
 <% include ../partials/alert %>
 
 <ul class="slideshow">
@@ -14,13 +15,7 @@
 
 <div class="container">
 	<form class="col-md-6 offset-md-3" id="myForm" action="/user/<%= user._id %>?_method=PUT" method="POST">
-		<div class="text-center">
-			<a href="/" id="homeLogo">
-				<i class="fas fa-users fa-3x"></i><br>
-				<span>CAMPUS.IO</span><br><br>
-			</a>
-		</div>
-		<legend>Edit your account</legend>
+		<legend>Edit your account details</legend>
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="fname">First Name</label>
@@ -72,7 +67,7 @@
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary" type="submit">Submit</button>
-			<a class="float-right" href="/reset">Reset password</a>
+			<a class="float-right" href="/forgot">Reset password</a>
 		</div>
 	</form>
 </div>

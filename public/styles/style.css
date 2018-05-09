@@ -25,3 +25,28 @@ a:hover {
 	position: absolute;
 	z-index: 1;
 }
+
+#messages 
+{ 
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0; 
+}
+
+#chatWindow #messages {
+	height: 450px;
+	overflow: hidden;
+	overflow-y: scroll; 
+}
+
+#messages li { 
+	padding: 10px 15px; 
+}
+
+#messages li:nth-child(odd) { 
+	background: #eee; 
+}
+
+#messageBox {
+	padding-top: 20px;
+}

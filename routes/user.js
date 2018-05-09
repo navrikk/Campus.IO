@@ -2,6 +2,7 @@
 var express		=	require('express'),
 	router		=	express.Router(),
 	User		=	require('../models/user'),
+	Chat 		=	require('../models/chat'),
 	middleware 	=	require('../middleware');
 
 
@@ -12,7 +13,27 @@ router.get('/home', middleware.isLoggedIn, function(req, res) {
 
 // render the chatroom page
 router.get('/chatroom', middleware.isLoggedIn, function(req, res) {
-	res.render('user/chatroom');
+	Chat.find({}, function(err, chats) {
+		if (err) {
+			req.flash('error', 'Something went wrong. Try again.');
+			res.redirect('/user/home');
+		} else {
+			res.render('user/chatroom', {chats: chats});
+		}
+	});
+});
+
+// handle the logic to save chat messages
+router.post('/chatroom', middleware.isLoggedIn, function(req, res) {
+	var newChat ={
+		message: req.body.message
+	};
+	Chat.create(newChat, function(err, newlyCreatedChat) {
+		if (err) {
+			req.flash('error', 'Something went wrong. Try again.');
+			res.redirect('/user/home');
+		}
+	});
 });
 
 // render the profile page
