@@ -8,6 +8,13 @@ middlewareObj.isLoggedIn = function(req, res, next) {
 	res.redirect('/login');
 }
 
+middlewareObj.checkIfLoggedIn = function(req, res, next) {
+	if (req.isAuthenticated()) {
+		return res.redirect('/user/home');
+	}
+	return next();
+}
+
 middlewareObj.usernameToUpperCase = function(req, res, next) {
 	req.body.username = req.body.username.toUpperCase();
 	next();

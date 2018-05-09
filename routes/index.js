@@ -9,7 +9,7 @@ var express		=	require('express'),
 	middleware  = 	require('../middleware');
 
 // render the landing page
-router.get('/', function(req, res) {
+router.get('/', middleware.checkIfLoggedIn, function(req, res) {
 	res.render('landing');
 });
 

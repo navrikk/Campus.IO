@@ -31,11 +31,11 @@
 				<% if (currentUser) { %>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-user-circle"></i> <%= currentUser.firstname %>
+							<img class="rounded-circle" src="<%= currentUser.avatar %>" height="18px" width="18px"> <%= currentUser.firstname %>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="/user/show">
-								Memebers
+								<i class="fa fa-users"></i> Memebers
 							</a>
 							<hr>
 							<a class="dropdown-item" href="/user/<%= currentUser._id %>">
