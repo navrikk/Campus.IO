@@ -36,6 +36,18 @@ router.post('/chatroom', middleware.isLoggedIn, function(req, res) {
 	});
 });
 
+// render the show all users page
+router.get('/show', function(req, res) {
+	User.find({}, function(err, allUsers) {
+		if (err) {
+			req.flash('error', 'Something went wrong. Try again.');
+			res.redirect('/user/home');
+		} else {
+			res.render('user/show', {users: allUsers});
+		}
+	});
+});
+
 // render the profile page
 router.get('/:id', middleware.isLoggedIn, function(req, res) {
 	User.findById(req.params.id, function(err, foundUser) {
