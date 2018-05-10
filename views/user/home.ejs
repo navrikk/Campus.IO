@@ -4,6 +4,28 @@
 
 <div class="container text-center">
 	This is the home page
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">
+			<a class="float-right" style="color: white" href="/quiz/addNewQuiz">Create Quiz</a>
+		</button>
+	</div>
+	<% posts.forEach(function(post) { %>
+	<div class="media rounded-box quiz-post overflow-hiddden">
+		<div >
+			<img class="rounded mx-auto d-block" src = "<%= post.author.avatar %>" alt="Generic placeholder image"> 
+			<h5 class="mt-0"><%= post.author.name%></h5>
+		</div>
+		<div class="media-body">
+			<h2 class="mt-0" > <%= post.title%></h6>
+		</div>
+		<div style="text-align: center; ">
+			<a href="/quiz/takeQuiz/<%= post.postId%>">
+				<button class="btn btn-outline-success rounded">Take Quiz</button>
+			</a>
+		</div>
+	</div>
+	<% }); %>
 </div>
+
 
 <% include ../partials/footer %>

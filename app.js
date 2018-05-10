@@ -12,6 +12,9 @@ var express 			= 	require('express'),
 
 // port configuration
 var port		=	process.env.PORT || 4000;
+	Quiz 		= 	require('./models/quiz');
+	quizRoutes 		= require('./routes/quiz');
+
 
 // requiring models
 var User 		=	require('./models/user');
@@ -59,6 +62,7 @@ app.use(function(req, res, next) {
 // using required routes
 app.use('/', indexRoutes);
 app.use('/user/', userRoutes);
+app.use('/quiz/', quizRoutes);
 
 
 // socket.io connection

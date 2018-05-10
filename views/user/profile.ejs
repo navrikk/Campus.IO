@@ -17,5 +17,33 @@
 		<% } %>
 	</div>
 </div>
+<div class="card padding-2">
+	<% user.posts.forEach(function(post) { %>
+	<div class="rounded-box row">
+		<div class="col-md-3">
+				<label style="font-size: 2em"><%= post.title%></label>
+		</div>
+		<div class="col-md-9">
+			<div class="row">
+				<div class="col text-center float-left">
+					<a href="/quiz/preview/<%= post.id%>"">
+						<button type="button" class="btn btn-primary">Preview</button>
+					</a>
+				</div>
+				<div class="col text-center float-left">
+					<a href="/quiz/addQuestions/<%= post.id%>"">
+						<button type="button" class="btn btn-secondary">Edit</button>
+					</a>
+				</div>
+				<div class="col text-center float-left">
+					<a href="/user/post/<%= post.id%>">
+						<button type="button" class="btn btn-success">Post</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%});%>
+</div>
 
 <% include ../partials/footer %>

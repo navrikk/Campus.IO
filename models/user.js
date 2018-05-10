@@ -13,7 +13,18 @@ var userSchema = new mongoose.Schema({
 	resetPasswordToken: String,
 	resetPasswordExpires: Date,
 	isAdmin: {type: Boolean, default: false},
-	isSupport: {type: Boolean, default: false}
+	isSupport: {type: Boolean, default: false},
+	posts: [
+	{
+		id : {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+			required: true
+		},
+		title: {type: String, required: true},
+		status: {type: Boolean, required: true, default: false},
+	}
+	]
 });
 
 userSchema.plugin(passportLocalMongoose);

@@ -50,3 +50,52 @@ a:hover {
 #messageBox {
 	padding-top: 20px;
 }
+
+/*Changes done by pujith*/
+.myRadioButton {
+    width: 30px;
+    height: 30px;
+}
+
+.overflow-hiddden{
+	display:block;
+	overflow: hidden;
+}
+
+.quiz-post{
+	margin: 10px 20%;
+}
+
+.rounded-box{
+	background-color: #BDBDBD;
+	margin-top: 2%;
+	padding: 2%;
+}
+
+.options{
+	float: left;
+}
+
+.margin-bottom{
+	margin-bottom: 2%;
+}
+.margin-top {
+	margin-top : 2%;
+}
+
+.margin-right{
+	margin-right: 2%;
+}
+
+.padding-left{
+	padding-left: 12%;
+}
+
+.padding-right{
+	padding-right: 2%;
+}
+
+.padding-2{
+	padding: 2%; 
+}
+/*^Changes changes by Pujith*/
