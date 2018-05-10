@@ -43,6 +43,12 @@
 		function saveChat(chatMessage) {
 			$.post(document.URL, {message: chatMessage});
 		}
+
+		$(document).ready(function() {
+			var scrollBar = document.getElementById("messages");
+			scrollBar.scrollTop = scrollBar.scrollHeight; 
+		});
+
 	</script>
 
 </div>
