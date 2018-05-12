@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
 	college: {type: String},
 	branch: {type: String},
 	avatar: {type: String, default: 'https://www.drupal.org/files/profile_default.png'},
+	avatarId: {type: String},
 	password: String,
 	resetPasswordToken: String,
 	resetPasswordExpires: Date,

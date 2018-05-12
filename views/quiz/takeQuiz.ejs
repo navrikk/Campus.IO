@@ -51,15 +51,15 @@ function shuffleArray(array) {
 		<% if (preview) {%>
 		<div class="margin-top">
 			<a href="/quiz/addQuestions/<%=currentQuiz.id%>">
-				<button class="btn btn-primary float-left" type="button">Back</button>
+				<button class="btn btn-info float-left" type="button">Back</button>
 			</a>
 			<a href="/user/post/<%= currentQuiz.id%>">
-				<button class="btn btn-primary float-right" type="button">Post</button>					
+				<button class="btn btn-info float-right" type="button">Post</button>					
 			</a>
 		</div>
 		<% }else {%>
 		<div class="form-group" style="margin-top: 2%; text-align: right;">
-			<button class="btn btn-primary" type="submit">Submit</button>
+			<button class="btn btn-info" type="submit">Submit</button>
 		</div>	
 		<%}%>
 	</form>

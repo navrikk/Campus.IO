@@ -32,11 +32,19 @@ router.post('/register', middleware.usernameToUpperCase, function(req, res) {
 			firstname: req.body.fname,
 			lastname: req.body.lname,
 			username: req.body.username,
-			email: req.body.email
+			email: req.body.email,
+			branch: req.body.branch,
+			college: req.body.college
 		});
-	} else {
+	} else if (req.body.radioOption === 'support') {
+		// make sure support username isn't a USN
 		if (req.body.username.match(usnPattern) || req.body.username.length === 0) {
 			req.flash('error', 'Invalid username');
+			return res.redirect('/register');
+		}
+		// make sure the join code is valid
+		if (!(req.body.joinCode === '1234567')) {
+			req.flash('error', 'Wrong join code.');
 			return res.redirect('/register');
 		}
 		newUser = new User({

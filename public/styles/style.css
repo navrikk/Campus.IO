@@ -57,45 +57,44 @@ a:hover {
     height: 30px;
 }
 
-.overflow-hiddden{
+.overflow-hiddden {
 	display:block;
 	overflow: hidden;
 }
 
-.quiz-post{
+.quiz-post {
 	margin: 10px 20%;
 }
 
-.rounded-box{
+.rounded-box {
 	background-color: #BDBDBD;
 	margin-top: 2%;
 	padding: 2%;
 }
 
-.options{
+.options {
 	float: left;
 }
 
-.margin-bottom{
+.margin-bottom {
 	margin-bottom: 2%;
 }
 .margin-top {
 	margin-top : 2%;
 }
 
-.margin-right{
+.margin-right {
 	margin-right: 2%;
 }
 
-.padding-left{
+.padding-left {
 	padding-left: 12%;
 }
 
-.padding-right{
+.padding-right {
 	padding-right: 2%;
 }
 
-.padding-2{
+.padding-2 {
 	padding: 2%; 
 }
-/*^Changes changes by Pujith*/

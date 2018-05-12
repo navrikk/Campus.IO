@@ -4,8 +4,35 @@ var express		=	require('express'),
 	User		=	require('../models/user'),
 	Chat 		=	require('../models/chat'),
 	Posts		=	require('../models/post'),
-	middleware 	=	require('../middleware');
+	middleware 	=	require('../middleware')
+	multer		=	require('multer'),
+	cloudinary	=	require('cloudinary');
 
+// multer file storage
+var storage 	=	multer.diskStorage({
+	filename: function(req, file, callback) {
+		callback(null, Date.now() + file.originalname);
+	}
+});
+
+// image filter for multer
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+
+// upload variable for multer
+var upload 		=	multer({storage:storage, fileFilter: imageFilter});
+
+// cloudinary configuration
+cloudinary.config({
+	cloud_name: '',
+	api_key: '',
+	api_secret: ''
+});
 
 // render the home page
 router.get('/home', middleware.isLoggedIn, function(req, res) {
@@ -44,7 +71,7 @@ router.post('/chatroom', middleware.isLoggedIn, function(req, res) {
 });
 
 // render the show all users page
-router.get('/show', function(req, res) {
+router.get('/show', middleware.isLoggedIn, function(req, res) {
 	User.find({}, function(err, allUsers) {
 		if (err) {
 			req.flash('error', 'Something went wrong. Try again.');
@@ -80,16 +107,26 @@ router.get('/:id/edit', middleware.isLoggedIn, function(req, res) {
 });
 
 // handle the logic for edit profile
-router.put('/:id', middleware.isLoggedIn, function(req, res) {
-	User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser) {
-		if(err) {
-			console.log(err);
-			req.flash('error', 'Something went wrong. Please try again.');
-			res.redirect('/user/home');
-		} else {
-			req.flash('success', 'Successfully updated.');
-			res.redirect('/user/' + updatedUser._id);
-		}
+router.put('/:id', middleware.isLoggedIn, upload.single('image'), function(req, res) {
+	// find an delete previously uploaded avatar
+	User.findById(req.params.id, function(err, foundUser) {
+		cloudinary.v2.uploader.destroy(foundUser.avatarId);
+	});
+	// upload image to cloudinary file storage
+	cloudinary.uploader.upload(req.file.path, function(result) {
+		// add cloudinary url for the image to the user db under avatar property
+		req.body.user.avatar = result.secure_url;
+		req.body.user.avatarId = result.public_id;
+		// search and update the respective user prifle db
+		User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser) {
+			if(err) {
+				req.flash('error', 'Something went wrong. Please try again.');
+				res.redirect('/user/home');
+			} else {
+				req.flash('success', 'Successfully updated.');
+				res.redirect('/user/' + updatedUser._id);
+			}
+		});
 	});
 });
 

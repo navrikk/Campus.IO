@@ -14,7 +14,7 @@
 </ul>
 
 <div class="container">
-	<form class="col-md-6 offset-md-3" id="myForm" action="/user/<%= user._id %>?_method=PUT" method="POST">
+	<form class="col-md-6 offset-md-3" id="myForm" action="/user/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
 		<legend>Edit your account details</legend>
 		<div class="form-row">
 			<div class="form-group col-md-6">
@@ -31,6 +31,10 @@
 					Initials or surname.
 				</small>
 			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="image">Profile picture</label>
+			<input class="form-control-file" type="file" id="image" name="image" accept="image/*">
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-4">
@@ -66,7 +70,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<button class="btn btn-primary" type="submit">Submit</button>
+			<button class="btn btn-info" type="submit">Submit</button>
 			<a class="float-right" href="/forgot">Reset password</a>
 		</div>
 	</form>
