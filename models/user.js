@@ -15,8 +15,7 @@ var userSchema = new mongoose.Schema({
 	resetPasswordExpires: Date,
 	isAdmin: {type: Boolean, default: false},
 	isSupport: {type: Boolean, default: false},
-	posts: [
-	{
+	posts: [{
 		id : {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
@@ -24,8 +23,13 @@ var userSchema = new mongoose.Schema({
 		},
 		title: {type: String, required: true},
 		status: {type: Boolean, required: true, default: false},
-	}
-	]
+	}],
+	oop: {type: Number, default: 0.0},
+	ds: {type: Number, default: 0.0},
+	db: {type: Number, default: 0.0},
+	nw: {type: Number, default: 0.0},
+	os: {type: Number, default: 0.0},
+	apt: {type: Number, default: 0.0}
 });
 
 userSchema.plugin(passportLocalMongoose);
