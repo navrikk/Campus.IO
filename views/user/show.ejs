@@ -11,11 +11,11 @@
 						<img class="rounded-circle float-left" src="<%= user.avatar %>" height="7%" width="7%">
 						<h4><%= user.firstname %> <%=user.lastname %></h4>
 						<%	if (user._id.equals(currentUser._id)) { %>
-								<h6>Me</h6>
+								<h6>(Me)</h6>
 						<%	} else if (user.isSupport) { %>
-								<h6>Teacher</h6>
+								<h6>(Teacher)</h6>
 						<% } else { %>
-								<h6>Student</h6>
+								<h6>(Student)</h6>
 						<% } %>
 					</li>
 				</a>

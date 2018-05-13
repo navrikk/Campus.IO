@@ -15,34 +15,96 @@
 		<% if (currentUser.username === user.username) { %>
 			<a href="/user/<%= user._id %>/edit">Edit Profile</a>
 		<% } %>
-	</div>
-	<div class="card padding-2">
-		<% user.posts.forEach(function(post) { %>
-		<div class="rounded-box row">
-			<div class="col-md-3">
-					<label style="font-size: 2em"><%= post.title%></label>
-			</div>
-			<div class="col-md-9">
-				<div class="row">
-					<div class="col text-center float-left">
-						<a href="/quiz/preview/<%= post.id%>"">
-							<button type="button" class="btn btn-info">Preview</button>
-						</a>
-					</div>
-					<div class="col text-center float-left">
-						<a href="/quiz/addQuestions/<%= post.id%>"">
-							<button type="button" class="btn btn-secondary">Edit</button>
-						</a>
-					</div>
-					<div class="col text-center float-left">
-						<a href="/user/post/<%= post.id%>">
-							<button type="button" class="btn btn-success">Post</button>
-						</a>
+		<div class="card padding-2">
+			<% user.posts.forEach(function(post) { %>
+			<div class="rounded-box row">
+				<div class="col-md-3">
+						<label style="font-size: 2em"><%= post.title%></label>
+				</div>
+				<div class="col-md-9">
+					<div class="row">
+						<div class="col text-center float-left">
+							<a href="/quiz/preview/<%= post.id%>"">
+								<button type="button" class="btn btn-info">Preview</button>
+							</a>
+						</div>
+						<div class="col text-center float-left">
+							<a href="/quiz/addQuestions/<%= post.id%>"">
+								<button type="button" class="btn btn-secondary">Edit</button>
+							</a>
+						</div>
+						<div class="col text-center float-left">
+							<a href="/user/post/<%= post.id%>">
+								<button type="button" class="btn btn-success">Post</button>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
+			<%});%>
+			<% if (!user.isSupport) { %>
+				<strong>Object Oriented Programming</strong>
+				<div class="bargraph">
+					College Topper
+					<p class="topper" style="width: 100%"></p>
+					College Average
+					<p class="average" style="width: 40%"></p>
+					You: <%= user.oop %> %
+					<p class="you" style="width: <%= user.oop %>%"></p>
+				</div>
+				<br><br>
+				<strong>Data Structures and Algorithms</strong>
+				<div class="bargraph">
+					College Topper
+					<p class="topper" style="width: 100%"></p>
+					College Average
+					<p class="average" style="width: 40%"></p>
+					You: <%= user.ds %> %
+					<p class="you" style="width: <%= user.ds %>%"></p>
+				</div>
+				<br><br>
+				<strong>Databases and DBMS</strong>
+				<div class="bargraph">
+					College Topper
+					<p class="topper" style="width: 100%"></p>
+					College Average
+					<p class="average" style="width: 40%"></p>
+					You: <%= user.dbs %> %
+					<p class="you" style="width: <%= user.dbs %>%"></p>
+				</div>
+				<br><br>
+				<strong>Networks</strong>
+				<div class="bargraph">
+					College Topper
+					<p class="topper" style="width: 100%"></p>
+					College Average
+					<p class="average" style="width: 40%"></p>
+					You: <%= user.nw %> %
+					<p class="you" style="width: <%= user.nw %>%"></p>
+				</div>
+				<br><br>
+				<strong>Operating Systems</strong>
+				<div class="bargraph">
+					College Topper
+					<p class="topper" style="width: 100%"></p>
+					College Average
+					<p class="average" style="width: 40%"></p>
+					You: <%= user.os %> %
+					<p class="you" style="width: <%= user.os %>%"></p>
+				</div>
+				<br><br>
+				<strong>General Aptitude</strong>
+				<div class="bargraph">
+					College Topper
+					<p class="topper" style="width: 100%"></p>
+					College Average
+					<p class="average" style="width: 40%"></p>
+					You: <%= user.apt %> %
+					<p class="you" style="width: 50%"></p>
+				</div>
+				<br><br>
+			<% } %>
 		</div>
-		<%});%>
 	</div>
 </div>
 

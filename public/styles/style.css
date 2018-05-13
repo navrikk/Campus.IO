@@ -101,3 +101,30 @@ a:hover {
 .padding-2 {
 	padding: 2%; 
 }
+
+.bargraph {
+	padding-top: 20px;
+	text-align: left;
+	background: #f5f5f5;
+}
+
+.bargraph p {
+	height: 35px;
+	color: white;
+	font-size: 14px;
+	line-height: 35px;
+	padding: 0px 0px;
+    margin-bottom: 5px;
+}
+
+.bargraph p.topper {
+	background: #428bca;
+}
+
+.bargraph p.average {
+	background: #428bca;	
+}
+
+.bargraph p.you {
+	background: #428bca;
+}
