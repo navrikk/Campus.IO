@@ -24,11 +24,11 @@ var userSchema = new mongoose.Schema({
 		title: {type: String, required: true},
 		status: {type: Boolean, required: true, default: false},
 	}],
-	oop: {type: Number, default: 12.0},
+	oop: {type: Number, default: 0.0},
 	ds: {type: Number, default: 0.0},
 	dbs: {type: Number, default: 0.0},
 	nw: {type: Number, default: 0.0},
-	os: {type: Number, default: 15.78},
+	os: {type: Number, default: 0.0},
 	apt: {type: Number, default: 0.0}
 });
 

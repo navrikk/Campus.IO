@@ -29,9 +29,9 @@ var upload 		=	multer({storage:storage, fileFilter: imageFilter});
 
 // cloudinary configuration
 cloudinary.config({
-	cloud_name: '',
-	api_key: '',
-	api_secret: ''
+	cloud_name: 'campus-io',
+	api_key: '363136259299826',
+	api_secret: '2gOt9sGSnwXR3c9epdk0VwSAdZ4'
 });
 
 // render the home page
@@ -72,14 +72,26 @@ router.post('/chatroom', middleware.isLoggedIn, function(req, res) {
 
 // render the show all users page
 router.get('/show', middleware.isLoggedIn, function(req, res) {
-	User.find({}, function(err, allUsers) {
-		if (err) {
-			req.flash('error', 'Something went wrong. Try again.');
-			res.redirect('/user/home');
-		} else {
-			res.render('user/show', {users: allUsers});
-		}
-	});
+	if (req.query.search) {
+		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+		User.find({firstname: regex}, function(err, foundUsers) {
+			if (err) {
+				req.flash('error', 'Something went wrong. Try again.');
+				res.redirect('/user/home');
+			} else {
+				res.render('user/show', {users: foundUsers});
+			}
+		});
+	} else {
+		User.find({}, function(err, allUsers) {
+			if (err) {
+				req.flash('error', 'Something went wrong. Try again.');
+				res.redirect('/user/home');
+			} else {
+				res.render('user/show', {users: allUsers});
+			}
+		});
+	}
 });
 
 // render the profile page
@@ -170,5 +182,8 @@ router.get('/post/:id', middleware.isLoggedIn, function(req, res) {
 	});
 });
 
+function escapeRegex(text) {
+	return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports 	=	router;
