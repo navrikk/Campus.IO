@@ -15,7 +15,7 @@
 			<% users.forEach(function(user) { %>
 				<a class="nav-link" href="/user/<%= user._id %>">
 					<li class="list-group-item">
-						<img class="rounded-circle float-left" src="<%= user.avatar %>" height="7%" width="7%">
+						<img class="rounded-circle float-left" src="<%= user.avatar %>" height="57px" width="57px">
 						<h4><%= user.firstname %> <%=user.lastname %></h4>
 						<%	if (user._id.equals(currentUser._id)) { %>
 								<h6>(Me)</h6>
