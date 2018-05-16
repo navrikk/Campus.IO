@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark myShadow">
 	<div class="container">
 		<% if (currentUser) { %>
 			<span class="navbar-brand">
@@ -33,7 +33,7 @@
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<img class="rounded-circle" src="<%= currentUser.avatar %>" height="18px" width="18px"> <%= currentUser.firstname %>
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<div class="dropdown-menu myShadow" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="/user/show">
 								<i class="fas fa-users"></i> Members
 							</a>

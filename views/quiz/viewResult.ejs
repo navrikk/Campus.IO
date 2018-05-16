@@ -2,10 +2,33 @@
 <% include ../partials/navbar %>
 <% include ../partials/alert %>
 
-	<div class="container">
-		<h1>
-			You have scored : <%= result%>
-		</h1>
-	</div>
+<div class="container">
+	<h1>
+		You have scored : <%= %> Out of <%= %>
+	</h1>
+</div>
 
-	<% include ../partials/footer %>
+<% include ../partials/footer %>
+
+
+<div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Score</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% var i =1; %>
+			<% currentQuiz.takenByUsers.forEach(function(user) { %>
+			<tr>
+				<th scope="row"><%= i++ %></th>
+				<td><%= user.name %></td>
+				<td><%= user.score * 100 + '%'%></td>
+			</tr>
+			<% }) %>
+		</tbody>
+	</table>
+</div>

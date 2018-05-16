@@ -3,7 +3,7 @@
 <% include ../partials/alert %>
 
 <div class="container text-center">
-	<div class="col-md-10 offset-md-1 card-header">
+	<div class="col-md-10 offset-md-1 backdrop myShadow">
 		<form class="col-md-12" accept="/user/show" method="GET">
 			<div class="row">
 				<div class="form-group col-md-12">
@@ -11,11 +11,12 @@
 				</div>
 			</div>
 		</form>
+		<hr>
 		<ul class="list-group">
 			<% users.forEach(function(user) { %>
 				<a class="nav-link" href="/user/<%= user._id %>">
 					<li class="list-group-item">
-						<img class="rounded-circle float-left" src="<%= user.avatar %>" height="57px" width="57px">
+						<img class="rounded-circle float-left myShadow" src="<%= user.avatar %>" height="57px" width="57px">
 						<h4><%= user.firstname %> <%=user.lastname %></h4>
 						<%	if (user._id.equals(currentUser._id)) { %>
 								<h6>(Me)</h6>

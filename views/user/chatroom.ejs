@@ -4,7 +4,7 @@
 
 <div class="container" id="chatWindow">
 	
-	<ul id="messages" class="card">
+	<ul id="messages" class="card backdrop">
 		<% chats.forEach(function(chat) { %>
 			<% if (!(chat.message === '')) { %>
 				<li><%= chat.message %></li>
@@ -29,21 +29,30 @@
 			var socket = io();
 			$('form').submit(function() {
 				var displayMessage = $('#myName').val() + ': ' + $('#myMessage').val();
-				socket.emit('chat message', displayMessage);
-				saveChat(displayMessage);
+				var chatMessage = {
+					author: $('#myName').val(),
+					message: $('#myMessage').val(),
+					displayMessage: displayMessage
+				}
+				socket.emit('chat message', chatMessage);
+				saveChat(chatMessage);
 				$('#myMessage').val('');
 				return false;
 			});
-			socket.on('chat message', function(msg) {
-				if (msg != '') {
-					$('#messages').append($('<li>').text(msg));
+			socket.on('chat message', function(chatMessage) {
+				if (chatMessage.message != '') {
+					$('#messages').append($('<li>').text(chatMessage.displayMessage));
+					var scrollBar = document.getElementById("messages");
+					scrollBar.scrollTop = scrollBar.scrollHeight;
 				}
 			});
 		});
 		function saveChat(chatMessage) {
-			$.post(document.URL, {message: chatMessage});
+			if (chatMessage.message != '') {
+				$.post(document.URL, {message: chatMessage.displayMessage});
+			}
 		}
-		$(document).ready(function() {
+		$(document).ready(function () {
 			var scrollBar = document.getElementById("messages");
 			scrollBar.scrollTop = scrollBar.scrollHeight; 
 		});

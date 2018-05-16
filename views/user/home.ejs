@@ -2,29 +2,52 @@
 <% include ../partials/navbar %>
 <% include ../partials/alert %>
 
+<%
+function checkUserHasTakenQuiz(quiz) {
+	for (var i = 0; i < quiz.takenByUsers.length; i++) {
+		if (quiz.takenByUsers[i].id.equals(userId)) {
+			return false;
+		}
+	}
+	return true;
+}
+%>
+
 <div class="container text-center">
 	This is the home page
 	<div class="form-group">
 		<button class="btn btn-info" type="submit">
-			<a class="float-right" style="color: white" href="/quiz/addNewQuiz">Create Quiz</a>
+			<a class="float-right" style="color: white" href="/quiz/add">Create Quiz</a>
 		</button>
 	</div>
-	<% posts.forEach(function(post) { %>
-	<div class="media rounded-box quiz-post overflow-hiddden">
-		<div >
-			<img class="rounded mx-auto d-block" src = "<%= post.author.avatar %>" alt="Generic placeholder image"> 
-			<h5 class="mt-0"><%= post.author.name%></h5>
-		</div>
-		<div class="media-body">
-			<h2 class="mt-0" > <%= post.title%></h6>
-		</div>
-		<div style="text-align: center; ">
-			<a href="/quiz/takeQuiz/<%= post.postId%>">
-				<button class="btn btn-outline-success rounded">Take Quiz</button>
-			</a>
-		</div>
-	</div>
-	<% }); %>
+	<%if(!isSupport){%>
+		<ul class="list-group">
+			<% allQuizzes.forEach(function(quiz) { %>
+				<!-- <a class="nav-link" href="/user/<%=  %>"> -->
+					<li class="list-group-item">
+						<div>
+							<img class="rounded-circle float-left" src="<%= quiz.author.avatar %>" height="57px" width="57px">
+							<h5 class="mt-0 float-left"><%= quiz.author.name%></h5>
+						</div>
+						<h2><%= quiz.title %></h2>
+					</li>
+				<!-- </a> -->
+			<%if(!checkUserHasTakenQuiz(quiz)){%>
+				<div style="text-align: center; ">
+					<a href="/quiz/viewResult/<%= quiz._id%>">
+						<button class="btn btn-outline-success rounded">View Results</button>
+					</a>
+				</div>
+			<%}else {%>
+				<div style="text-align: center; ">
+					<a href="/quiz/take/<%= quiz._id%>">
+						<button class="btn btn-outline-success rounded">Take Quiz</button>
+					</a>
+				</div>
+			<%}%>
+			<% }); %>
+		</ul>
+	<%}%>
 </div>
 
 

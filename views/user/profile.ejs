@@ -3,7 +3,7 @@
 <% include ../partials/alert %>
 
 <div class="container text-center">
-	<div class="col-md-10 offset-md-1 card-header">
+	<div class="col-md-10 offset-md-1 backdrop myShadow">
 		<img class="rounded mx-auto d-block" src="<%= user.avatar %>" height="247" width="247">
 		<h3><%= user.firstname %> <%=user.lastname %></h3>
 		<% var usnPattern = /^[1-4][A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/; %>
@@ -13,99 +13,136 @@
 		<h4><%= user.email %></h4>
 		<h4><%= user.branch %>, <%= user.college %></h4>
 		<% if (currentUser.username === user.username) { %>
-			<a href="/user/<%= user._id %>/edit">Edit Profile</a>
+			<a class="btn btn-warning" href="/user/<%= user._id %>/edit">Edit Profile</a>
 		<% } %>
-		<div class="card padding-2">
-			<% user.posts.forEach(function(post) { %>
-			<div class="rounded-box row">
-				<div class="col-md-3">
-						<label style="font-size: 2em"><%= post.title%></label>
-				</div>
-				<div class="col-md-9">
-					<div class="row">
-						<div class="col text-center float-left">
-							<a href="/quiz/preview/<%= post.id%>"">
-								<button type="button" class="btn btn-info">Preview</button>
-							</a>
-						</div>
-						<div class="col text-center float-left">
-							<a href="/quiz/addQuestions/<%= post.id%>"">
-								<button type="button" class="btn btn-secondary">Edit</button>
-							</a>
-						</div>
-						<div class="col text-center float-left">
-							<a href="/user/post/<%= post.id%>">
-								<button type="button" class="btn btn-success">Post</button>
-							</a>
-						</div>
-					</div>
-				</div>
+		<p></p>
+		<hr>
+		<!-- Details to be displayed for student profile -->
+
+		<% if (!user.isSupport) { %>
+
+
+			<strong>Object Oriented Programming</strong>
+			<p></p>
+			<div class="bargraph">
+				College Topper:
+				<p class="topper" style="width: 100%"></p>
+				College Average:
+				<p class="average" style="width: 40%"></p>
+				<% var oop = (user.oop.sum/user.oop.numberOfQuizzes * 100) %>
+				<% if(user.oop.numberOfQuizzes == 0){ oop = 0;} %>
+				You:  <%= oop %>%
+				<p class="you" style="width: <%= oop %>%"></p>
 			</div>
-			<%});%>
-			<% if (!user.isSupport) { %>
-				<strong>Object Oriented Programming</strong>
-				<div class="bargraph">
-					College Topper
-					<p class="topper" style="width: 100%"></p>
-					College Average
-					<p class="average" style="width: 40%"></p>
-					You: <%= user.oop %> %
-					<p class="you" style="width: <%= user.oop %>%"></p>
-				</div>
-				<br><br>
-				<strong>Data Structures and Algorithms</strong>
-				<div class="bargraph">
-					College Topper
-					<p class="topper" style="width: 100%"></p>
-					College Average
-					<p class="average" style="width: 40%"></p>
-					You: <%= user.ds %> %
-					<p class="you" style="width: <%= user.ds %>%"></p>
-				</div>
-				<br><br>
-				<strong>Databases and DBMS</strong>
-				<div class="bargraph">
-					College Topper
-					<p class="topper" style="width: 100%"></p>
-					College Average
-					<p class="average" style="width: 40%"></p>
-					You: <%= user.dbs %> %
-					<p class="you" style="width: <%= user.dbs %>%"></p>
-				</div>
-				<br><br>
-				<strong>Networks</strong>
-				<div class="bargraph">
-					College Topper
-					<p class="topper" style="width: 100%"></p>
-					College Average
-					<p class="average" style="width: 40%"></p>
-					You: <%= user.nw %> %
-					<p class="you" style="width: <%= user.nw %>%"></p>
-				</div>
-				<br><br>
-				<strong>Operating Systems</strong>
-				<div class="bargraph">
-					College Topper
-					<p class="topper" style="width: 100%"></p>
-					College Average
-					<p class="average" style="width: 40%"></p>
-					You: <%= user.os %> %
-					<p class="you" style="width: <%= user.os %>%"></p>
-				</div>
-				<br><br>
-				<strong>General Aptitude</strong>
-				<div class="bargraph">
-					College Topper
-					<p class="topper" style="width: 100%"></p>
-					College Average
-					<p class="average" style="width: 40%"></p>
-					You: <%= user.apt %> %
-					<p class="you" style="width: <%= user.apt %>%"></p>
-				</div>
-				<br><br>
-			<% } %>
-		</div>
+			<p></p>
+
+
+			<strong>Data Structures and Algorithms</strong>
+			<p></p>
+			<div class="bargraph">
+				College Topper:
+				<p class="topper" style="width: 100%"></p>
+				College Average:
+				<p class="average" style="width: 40%"></p>
+				<% var ds = (user.ds.sum/user.ds.numberOfQuizzes * 100) %>
+				<% if(user.ds.numberOfQuizzes == 0){ ds = 0;} %>
+				You: <%=ds%> %
+				<p class="you" style="width: <%= ds %>%"></p>
+			</div>
+			<p></p>
+
+
+			<strong>Databases and DBMS</strong>
+			<p></p>
+			<div class="bargraph">
+				College Topper:
+				<p class="topper" style="width: 100%"></p>
+				College Average:
+				<p class="average" style="width: 40%"></p>
+				<% var dbs = (user.dbs.sum/user.dbs.numberOfQuizzes * 100)%>
+				<% if(user.dbs.numberOfQuizzes == 0){ dbs = 0;} %>
+				You: <%= dbs%> %
+				<p class="you" style="width: <%= dbs %>%"></p>
+			</div>
+			<p></p>
+
+
+			<strong>Networks</strong>
+			<p></p>
+			<div class="bargraph">
+				College Topper:
+				<p class="topper" style="width: 100%"></p>
+				College Average:
+				<p class="average" style="width: 40%"></p>
+				<% var nw = (user.nw.sum/user.nw.numberOfQuizzes * 100)%>
+				<% if(user.nw.numberOfQuizzes == 0){ nw = 0;} %>
+				You: <%= nw%> %
+				<p class="you" style="width: <%= nw %>%"></p>
+			</div>
+			<p></p>
+
+
+			<strong>Operating Systems</strong>
+			<p></p>
+			<div class="bargraph">
+				College Topper:
+				<p class="topper" style="width: 100%"></p>
+				College Average:
+				<p class="average" style="width: 40%"></p>
+				<% var os = (user.os.sum/user.os.numberOfQuizzes * 100)%>
+				<% if(user.os.numberOfQuizzes == 0){ os = 0;} %>
+				You: <%= os %> %
+				<p class="you" style="width: <%= os %>%"></p>
+			</div>
+			<p></p>
+
+
+			<strong>General Aptitude</strong>
+			<p></p>
+			<div class="bargraph">
+				College Topper:
+				<p class="topper" style="width: 100%"></p>
+				College Average:
+				<p class="average" style="width: 40%"></p>
+				<% var apt = (user.apt.sum/user.apt.numberOfQuizzes * 100)%>
+				<% if(user.apt.numberOfQuizzes == 0){ apt = 0;} %>
+				You: <%= apt %> %
+				<p class="you" style="width: <%= apt %>%"></p>
+			</div>
+			<p></p>
+
+		<% } else { %>
+
+
+			<ul class="list-group">
+				<% user.quizzes.forEach(function(quiz) { %>
+					<li class="list-group-item">
+						<div class="float-left">
+							<a href="/quiz/preview/<%= quiz.id%>">
+								<h4><%= quiz.title %></h4>
+							</a>
+						</div>
+						<a class="btn btn-dark" href="/quiz/addQuestions/<%= quiz.id%>">
+							Edit
+						</a>
+						<% if (quiz.isPosted) { %>
+							<a class="float-right btn btn-dark" href="#">
+								View Results
+							</a>
+						<% } else { %>
+							<a class="float-right btn btn-dark" href="/user/post/<%= quiz.id %>">
+								Post
+							</a>
+						<% } %>
+					</li>
+				<% }); %>
+			</ul>
+
+
+		<% } %>
+
 	</div>
+
 </div>
 
 <% include ../partials/footer %>

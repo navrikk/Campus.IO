@@ -3,7 +3,6 @@ var express		=	require('express'),
 	router		=	express.Router(),
 	User		=	require('../models/user'),
 	Chat 		=	require('../models/chat'),
-	Posts		=	require('../models/post'),
 	middleware 	=	require('../middleware')
 	multer		=	require('multer'),
 	cloudinary	=	require('cloudinary');
@@ -36,11 +35,11 @@ cloudinary.config({
 
 // render the home page
 router.get('/home', middleware.isLoggedIn, function(req, res) {
-	Posts.find({}, function(err, allPosts) {
+	Quiz.find({'isPosted': true}, function(err, allQuizzes) {
 		if(err) {
 			req.flash('error', 'Something went wrong. Please try again.');
 		} else {
-			res.render('user/home', {posts: allPosts});
+			res.render('user/home', {allQuizzes: allQuizzes, isSupport: req.user.isSupport, userId: req.user._id});
 		}
 	});
 });
@@ -155,44 +154,27 @@ router.put('/:id', middleware.isLoggedIn, upload.single('image'), function(req, 
 
 // handles the post method of Posts
 router.get('/post/:id', middleware.isLoggedIn, function(req, res) {
-	Quiz.findById(req.params.id, function(err, foundQuiz) {
-		if (err) {
-			req.flash('error', 'Quiz not found');
-			res.redirect('/user/home');
-		}
-		else{
-			User.findById(req.user._id, function(err, foundUser) {
-				if (err) {
-					req.flash('error', 'User not found');
-					res.redirect('/user/home');
-				}
-				else
-				{
-					var post = {
-						author: {
-							id : foundUser._id,
-							name : foundUser.firstname + foundUser.lastname,
-							avatar: foundUser.avatar
-						},
-						title: foundQuiz.title,
-						postId: foundQuiz._id,
-					}
-					Posts.create(post ,function(err, newlyCreated){
-						if (err) {
-							req.flash('error', 'Quiz already posted');
-							res.redirect('/user/' + foundUser._id);
-						}
-						else{
-							req.flash('success', 'Quiz sucessfully posted');
-							res.redirect('/user/' + foundUser._id);
-						}
-					});
-				}
-			});
-		}	
+	Quiz.update({_id: req.params.id}, {isPosted: true}, function(err, affected, resp) {
+	   if (err) {
+	   		req.flash('error', 'Something went wrong. Please try again');
+	   		res.redirect('/user/home');
+	   }
+	   else{
+	   		User.update({'_id': req.user._id, 'quizzes.id': req.params.id},
+	   			{'$set': {'quizzes.$.isPosted': true}}, 
+	   			function(err, updatedUser) {
+	   				if (err) {
+	   					req.flash('error', 'Something went wrong. Please try again');
+	   					res.redirect('/user/home');
+	   				}else{
+	   					req.flash('success', 'Successfully updated.');
+	   					res.redirect('/user/' + req.user._id);
+	   				}
+	   			}
+	   		);
+	   }
 	});
 });
-
 function escapeRegex(text) {
 	return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
