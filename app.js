@@ -24,8 +24,12 @@ var indexRoutes	=	require('./routes/index'),
 	userRoutes  = 	require('./routes/user');
 
 // mongodb connection
-mongoose.connect('mongodb://localhost/campus_io');
+// mongoose.connect('mongodb://localhost/campus_io');
 // , {useMongoClient: true});
+
+// remote mongo db
+mongoose.connect('mongodb://campus-io:passwordb14@ds225840.mlab.com:25840/campus-io')
+
 
 // custom middleware
 app.use(bodyParser.urlencoded({extended: true}));

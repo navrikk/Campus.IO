@@ -70,7 +70,7 @@ router.post('/register', middleware.usernameToUpperCase, function(req, res) {
 					service: 'Gmail',
 					auth: {
 						user: 'campus.io.mailer@gmail.com',
-						pass: 'password goes here'
+						pass: 'password@b14'
 					}
 				});
 				var mailOptions = {
@@ -160,7 +160,7 @@ router.post('/forgot', function(req, res, next) {
 				service: 'Gmail', 
 				auth: {
 					user: 'campus.io.mailer@gmail.com',
-					pass: 'password goes here'
+					pass: 'password@b14'
 				}
 			});
 			var mailOptions = {
@@ -225,7 +225,7 @@ router.post('/reset/:token', function(req, res) {
 				service: 'Gmail',
 				auth: {
 					user: 'campus.io.mailer@gmail.com',
-					pass: 'password goes here'
+					pass: 'password@b14'
 				}
 			});
 			var mailOptions = {

@@ -2,33 +2,39 @@
 <% include ../partials/navbar %>
 <% include ../partials/alert %>
 
+<% currentQuiz.takenByUsers.sort(function(b, a) {
+   return a.score - b.score;
+}); %>
+
 <div class="container">
-	<h1>
-		You have scored : <%= %> Out of <%= %>
-	</h1>
+	<div class="backdrop myShadow">
+		<p></p>
+		<div class="text-center">
+			<h2>
+				<%= currentQuiz.title %> - <%= currentQuiz.author.name %>
+			</h2>
+		</div>
+		<p></p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">NAME</th>
+					<th scope="col">SCORE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% var i = 1; %>
+				<% currentQuiz.takenByUsers.forEach(function(user) { %>
+				<tr>
+					<th scope="row"><%= i++ %></th>
+					<td><%= user.name %></td>
+					<td><%= (user.score * 100).toFixed(2) + '%'%></td>
+				</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <% include ../partials/footer %>
-
-
-<div>
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Name</th>
-				<th scope="col">Score</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% var i =1; %>
-			<% currentQuiz.takenByUsers.forEach(function(user) { %>
-			<tr>
-				<th scope="row"><%= i++ %></th>
-				<td><%= user.name %></td>
-				<td><%= user.score * 100 + '%'%></td>
-			</tr>
-			<% }) %>
-		</tbody>
-	</table>
-</div>

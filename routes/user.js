@@ -95,13 +95,33 @@ router.get('/show', middleware.isLoggedIn, function(req, res) {
 
 // render the leaderboard page
 router.get('/leaderboard', middleware.isLoggedIn, function(req, res) {
-	User.find({isSupport: false}, function(err, allStudentUsers) {
-		if (err) {
-			req.flash('error', 'Something went wrong. Try again.');
-			return res.redirect('/user/home');
-		}
-		res.render('user/leaderboard', {allUsers: allStudentUsers});
-	});
+    User.find({isSupport: false}, function(err, allStudentUsers) {
+        if (err) {
+            req.flash('error', 'Something went wrong. Try again.');
+            return res.redirect('/user/home');
+        }
+        var scoreBoard = new Array();
+        allStudentUsers.forEach(function(user) {
+            var currentPoints = 0.0;
+            currentPoints += user.oop.sum;
+            currentPoints += user.ds.sum;
+            currentPoints += user.dbs.sum;
+            currentPoints += user.nw.sum;
+            currentPoints += user.os.sum;
+            currentPoints += user.apt.sum;
+            scoreBoard.push({
+                student : {
+                    name : user.firstname + user.lastname,
+                    _id : user._id
+                },
+                points : currentPoints
+            });
+        });
+        scoreBoard.sort(function(b, a){
+           return a.points - b.points;
+        });
+        res.render('user/leaderboard', {scoreBoard: scoreBoard});
+    });
 });
 
 // render the profile page
@@ -111,10 +131,58 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
 			req.flash('error', 'Profile does not exist.');
 			res.redirect('/user/home');
 		} else {
-			res.render('user/profile', {user: foundUser});
+			User.find({isSupport: false},function(err, allUsers) {
+				var collegeTopper = {
+					oop		: 0,
+					ds  	: 0,
+					dbs		: 0,
+					nw 		: 0,
+					os 		: 0,
+					apt		: 0				
+				}
+				var collegeAverage = {
+					oop		: 0,
+					ds  	: 0,
+					dbs		: 0,
+					nw 		: 0,
+					os 		: 0,
+					apt		: 0
+				}
+				allUsers.forEach(function(user) {
+					var oop = (user.oop.numberOfQuizzes > 0 ? user.oop.sum / user.oop.numberOfQuizzes * 100 : 0);
+					collegeTopper.oop = (collegeTopper.oop > oop ? collegeTopper.oop : oop);
+					collegeAverage.oop += oop;
+					var ds = (user.ds.numberOfQuizzes > 0 ? user.ds.sum / user.ds.numberOfQuizzes * 100 : 0);
+					collegeTopper.ds = (collegeTopper.ds > ds ? collegeTopper.ds : ds);
+					collegeAverage.ds += ds;
+					var dbs = ((user.dbs.numberOfQuizzes > 0) ? user.dbs.sum / user.dbs.numberOfQuizzes * 100 : 0);
+					collegeTopper.dbs = ((collegeTopper.dbs > dbs )? collegeTopper.dbs : dbs);
+					collegeAverage.dbs += dbs;
+					var nw = (user.nw.numberOfQuizzes > 0 ? user.nw.sum / user.nw.numberOfQuizzes * 100 : 0);
+					collegeTopper.nw = (collegeTopper.nw > nw ? collegeTopper.nw : nw);
+					collegeAverage.nw += nw;
+					var os = (user.os.numberOfQuizzes > 0 ? user.os.sum / user.os.numberOfQuizzes * 100 : 0);
+					collegeTopper.os = (collegeTopper.os > os ? collegeTopper.os : os);
+					collegeAverage.os += os;
+					var apt = (user.apt.numberOfQuizzes > 0 ? user.apt.sum / user.apt.numberOfQuizzes * 100 : 0);
+					collegeTopper.apt = (collegeTopper.apt > apt ? collegeTopper.apt : apt);
+					collegeAverage.apt += apt;
+
+				});
+				collegeAverage.oop /= allUsers.length;
+				collegeAverage.ds /= allUsers.length;
+				collegeAverage.dbs /= allUsers.length;
+				collegeAverage.nw /= allUsers.length;
+				collegeAverage.os /= allUsers.length;
+				collegeAverage.apt /= allUsers.length;
+
+
+				res.render('user/profile', {user: foundUser, collegeAverage: collegeAverage, collegeTopper: collegeTopper});
+			})
 		}
 	});
 });
+
 
 // render the edit profile page
 router.get('/:id/edit', middleware.isLoggedIn, function(req, res) {
@@ -158,15 +226,14 @@ router.get('/post/:id', middleware.isLoggedIn, function(req, res) {
 	   if (err) {
 	   		req.flash('error', 'Something went wrong. Please try again');
 	   		res.redirect('/user/home');
-	   }
-	   else{
+	   } else {
 	   		User.update({'_id': req.user._id, 'quizzes.id': req.params.id},
 	   			{'$set': {'quizzes.$.isPosted': true}}, 
 	   			function(err, updatedUser) {
 	   				if (err) {
 	   					req.flash('error', 'Something went wrong. Please try again');
 	   					res.redirect('/user/home');
-	   				}else{
+	   				} else {
 	   					req.flash('success', 'Successfully updated.');
 	   					res.redirect('/user/' + req.user._id);
 	   				}

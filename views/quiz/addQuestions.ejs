@@ -1,45 +1,60 @@
 <% include ../partials/header %>
+
+<link rel="stylesheet" type="text/css" href="/styles/landing.css">
+
 <% include ../partials/navbar %>
 <% include ../partials/alert %>
 
+<ul class="slideshow">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
+<br>
+<br>
+<br>
+
 <div class="container">
-	<div class="text-center margin-bottom">
-		<i class="fas fa-graduation-cap fa-3x"></i><br>
-		<span>CAMPUS.IO</span>
-	</div>
-		<form class="col-md-6 offset-md-3"
-			action="/quiz/addQuestions/<%= quizId %>"
-			method="POST"> 
-			<div class="overflow-hiddden">
-				<div class="float-left">
-					<legend> Add question <%= questionNo %>
-					details</legend>
-				</div>
-				<div class="float-right">
-					<a href="/quiz/preview/<%= quizId %>">
-						<button class="btn btn-outline-success rounded float-right"
-						type="button">Preview Quiz</button>
-					</a>
-				</div>
+	<form id="myForm" class="col-md-6 offset-md-3" action="/quiz/addQuestions/<%= quizId %>" method="POST"> 
+		<div class="overflow-hiddden">
+			<div class="float-left">
+				<legend>
+					Add question <%= questionNo %> details
+				</legend>
 			</div>
-			<div class="form-group">
-				<label for="question">Question</label>
-				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-				type="text" name="question" required="true"></textarea>
+			<div class="float-right">
+				<a href="/quiz/preview/<%= quizId %>">
+					<button class="btn btn-warning" type="button">
+						Preview Quiz
+					</button>
+				</a>
 			</div>
-			<div id="optionContainer"></div>
-			<div >
-				<button id="addOption" class="btn btn-outline-success rounded float-left"
-				type="button"> Add Option</button>
-				<div class="overflow-hiddden margin-bottom" id="removeOption" >
-					<button class="btn btn-outline-danger rounded float-right" type="button">Remove Option</button>
-				</div>
-			</div>
-			<button class="btn btn-info float-right" type="submit">
-			Next Question</button>
-		</form>
-	</div>
+		</div>
+		<div class="form-group">
+			<label for="question">Question</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+			type="text" name="question" required="true"></textarea>
+		</div>
+		<div id="optionContainer"></div>
+		<button id="addOption" class="btn btn-success float-left" type="button">
+			Add Option
+		</button>
+		<div class="overflow-hiddden margin-bottom" id="removeOption" >
+			<button class="btn btn-danger float-right" type="button">
+				Remove Option
+			</button>
+		</div>
+		<button class="btn btn-info float-right" type="submit">
+			Next Question
+		</button>
+		<br>
+		<br>
+	</form>
 </div>
 
 <script type="text/javascript" src="/scripts/addQuestions.js"></script>
+
 <% include ../partials/footer %>

@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+<% include ../partials/alert %>
+
+
+<div class="container backdrop myShadow">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">NAME</th>
+      <th scope="col">POINTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% var i = 1 %>
+    <% scoreBoard.forEach(function(entry) { %>
+      <tr>
+        <th scope="row"><%= i++ %></th>
+        <td><%= entry.student.name %></td>
+        <td><%= entry.points.toFixed(2) * 100  %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+  </table>
+</div>
+
+<% include ../partials/footer %>

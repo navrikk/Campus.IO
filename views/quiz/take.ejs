@@ -12,69 +12,74 @@ function shuffleArray(array) {
 	}
 }
 %>
-
-<!-- Custom stylesheet -->
-<link rel="stylesheet" type="text/css" href="/styles/style.css">
-<div class="container ">
-	<div>
-		<h1>
-			<%= currentQuiz.title%>
-		</h1>
-	</div>
-	<% if (!preview) {%>
+<div class="container">
+	<div class="backdrop myShadow">
 		<div>
-			Time left: <span id="remainingTime"></span>
+			<h1>
+				<%= currentQuiz.title%>
+			</h1>
 		</div>
-	<%}%>
-	<form id="quiz" action="/quiz/take/<%=currentQuiz.id%>" method="POST">
 		<% if (!preview) {%>
-		<%shuffleArray(currentQuiz.questions)%>
-		<%}%>
-		<% currentQuiz.questions.forEach(function(question) { %>
-		<div class="input-group rounded card-header question" >
-			<div class="input-group">
-				<p>
-					<pre ><%= question.question%></pre>
-				</p>
-				<br/>
+			<div>
+				Time left: <span id="remainingTime"></span>
 			</div>
-			<div class="">
-				<% if (!preview) {%>
-				<% shuffleArray(question.options)%>
-				<%}%>
-				<% question.options.forEach(function(option) { %>
-				<div style="margin-top: 3px">
-					<input type="radio" id="q156" class="myRadioButton options" style="margin-left: 10px" name="<%= question.id%>" value="<%= option.option%>" > 
-					<label style="margin-left: 10px">
-						<%= option.option%> <br/>
-					</label>
+		<%}%>
+		<form id="quiz" action="/quiz/take/<%=currentQuiz.id%>" method="POST">
+			<% if (!preview) {%>
+			<%shuffleArray(currentQuiz.questions)%>
+			<%}%>
+			<% currentQuiz.questions.forEach(function(question) { %>
+			<div class="input-group rounded question" >
+				<div class="input-group">
+					<p>
+						<pre><%= question.question%></pre>
+					</p>
+					<br/>
 				</div>
-				<% }); %>
+				<div class="">
+					<% if (!preview) {%>
+					<% shuffleArray(question.options)%>
+					<%}%>
+					<% question.options.forEach(function(option) { %>
+					<div style="margin-top: 3px">
+						<input type="radio" id="q156" class="myRadioButton options" style="margin-left: 10px" name="<%= question.id%>" value="<%= option.option%>" > 
+						<label style="margin-left: 10px">
+							<%= option.option%> <br/>
+						</label>
+					</div>
+					<% }); %>
+				</div>
 			</div>
-		</div>
-		<% }); %>
-		<% if (preview) {%>
-			<div class="margin-top">
-				<a href="/quiz/addQuestions/<%=currentQuiz.id%>">
-					<button class="btn btn-info float-left" type="button">Back</button>
-				</a>
-				<% if (!currentQuiz.isPosted) {%>
-					<a href="/user/post/<%= currentQuiz.id%>">
-						<button class="btn btn-info float-right" type="button">Post</button>					
+			<hr>
+			<% }); %>
+			<% if (preview) {%>
+				<div class="margin-top">
+					<a href="/quiz/addQuestions/<%=currentQuiz.id%>">
+						<button class="btn btn-info float-left" type="button">Back</button>
 					</a>
-				<%}else{%>
-					<a href="#"<%= currentQuiz.id%>">
-						<button class="btn btn-info float-right" type="button">View results</button>					
-					</a>
-				<%}%>
-			</div>
-		<% }else {%>
-		<div class="form-group" style="margin-top: 2%; text-align: right;">
-			<button class="btn btn-info" type="submit">Submit</button>
-		</div>	
-		<%}%>
-	</form>
+					<% if (!currentQuiz.isPosted) {%>
+						<a href="/user/post/<%= currentQuiz.id%>">
+							<button class="btn btn-info float-right" type="button">Post</button>					
+						</a>
+					<%}else{%>
+						<a href="#"<%= currentQuiz.id%>">
+							<button class="btn btn-info float-right" type="button">View results</button>					
+						</a>
+					<%}%>
+				</div>
+			<% }else {%>
+			<div class="form-group" style="margin-top: 2%; text-align: right;">
+				<button class="btn btn-info" type="submit">Submit</button>
+			</div>	
+			<%}%>
+			<br>
+			<br>
+		</form>
+	</div>
 </div>
-<script type="text/javascript" src="/scripts/timer.js"></script>
+
+<% if (!preview) { %>
+	<script type="text/javascript" src="/scripts/timer.js"></script>
+<% } %>
 
 <% include ../partials/footer %>

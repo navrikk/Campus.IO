@@ -46,7 +46,7 @@ router.post('/add', middleware.isLoggedIn, function(req, res) {
 					);
 			}
 		});
-	}else{
+	} else {
 		req.flash('error', 'You don\'t have permission to this page');
 		res.redirect('/user/home');
 	}
@@ -171,7 +171,7 @@ router.post('/take/:quizId', middleware.isLoggedIn, function(req, res) {
 	if (!req.user.isSupport) {
 		Quiz.findById(req.params.quizId, function(error, foundQuiz) {
 			if(error){
-				req.flash('error', 'Something went wrong1. Please try again.', error);
+				req.flash('error', 'Something went wrong. Please try again.', error);
 				res.redirect('/user/home');
 			}
 			else{
@@ -190,13 +190,13 @@ router.post('/take/:quizId', middleware.isLoggedIn, function(req, res) {
 				}
 				Quiz.findByIdAndUpdate(foundQuiz._id,foundQuiz,function(err, updatedQuiz) {
 					if(err){
-						req.flash('error', 'Something went wrong2. Please try again.');
+						req.flash('error', 'Something went wrong. Please try again.');
 						res.redirect('/user/home');
 					}
 					else{
 						User.findById(req.user._id,function(err, foundUser) {
 							if (err) {
-								req.flash('error', 'Something went wrong3. Please try again.');
+								req.flash('error', 'Something went wrong. Please try again.');
 								res.redirect('/user/home');
 							}
 							foundUser[foundQuiz.category].sum += score;
@@ -208,7 +208,7 @@ router.post('/take/:quizId', middleware.isLoggedIn, function(req, res) {
 							});
 							User.findByIdAndUpdate(foundUser._id, foundUser, function(err, updatedUser) {
 								if(err) {
-									req.flash('error', 'Something went wrong4. Please try again.');
+									req.flash('error', 'Something went wrong. Please try again.');
 									res.redirect('/user/home');
 								} else {
 									req.flash('success', 'Successfully updated.');

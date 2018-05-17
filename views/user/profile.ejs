@@ -8,133 +8,143 @@
 		<h3><%= user.firstname %> <%=user.lastname %></h3>
 		<% var usnPattern = /^[1-4][A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/; %>
 		<%	if (user.username.match(usnPattern)) { %>
-				<h4><%= user.username %></h4>
+		<h4><%= user.username %></h4>
 		<%	}	%>
 		<h4><%= user.email %></h4>
 		<h4><%= user.branch %>, <%= user.college %></h4>
 		<% if (currentUser.username === user.username) { %>
-			<a class="btn btn-warning" href="/user/<%= user._id %>/edit">Edit Profile</a>
+		<a class="btn btn-warning" href="/user/<%= user._id %>/edit">Edit Profile</a>
 		<% } %>
 		<p></p>
 		<hr>
-		<!-- Details to be displayed for student profile -->
-
-		<% if (!user.isSupport) { %>
 
 
+		<% if ((!user.isSupport) && ((currentUser.id === user.id) || (currentUser.isSupport))) { %>
+
+			<!-- Details to be displayed for student profile -->
+		
 			<strong>Object Oriented Programming</strong>
 			<p></p>
 			<div class="bargraph">
-				College Topper:
-				<p class="topper" style="width: 100%"></p>
-				College Average:
-				<p class="average" style="width: 40%"></p>
+				College Topper: <%= collegeTopper.oop.toFixed(2) %>%
+				<p class="topper" style="width: <%=collegeTopper.oop.toFixed(2) %>%"></p>
+				College Average: <%= collegeAverage.oop.toFixed(2) %>%
+				<p class="average" style="width: <%= collegeAverage.oop.toFixed(2) %>%"></p>
 				<% var oop = (user.oop.sum/user.oop.numberOfQuizzes * 100) %>
 				<% if(user.oop.numberOfQuizzes == 0){ oop = 0;} %>
-				You:  <%= oop %>%
-				<p class="you" style="width: <%= oop %>%"></p>
+				You:  <%= oop.toFixed(2) %>%
+				<p class="you" style="width: <%= oop.toFixed(2) %>%"></p>
 			</div>
 			<p></p>
+			<hr>
 
 
 			<strong>Data Structures and Algorithms</strong>
 			<p></p>
 			<div class="bargraph">
-				College Topper:
-				<p class="topper" style="width: 100%"></p>
-				College Average:
-				<p class="average" style="width: 40%"></p>
+				College Topper: <%= collegeTopper.ds.toFixed(2) %>%
+				<p class="topper" style="width: <%=collegeTopper.ds.toFixed(2) %>%"></p>
+				College Average: <%= collegeAverage.ds.toFixed(2) %>%
+				<p class="average" style="width: <%= collegeAverage.ds.toFixed(2) %>%"></p>
 				<% var ds = (user.ds.sum/user.ds.numberOfQuizzes * 100) %>
 				<% if(user.ds.numberOfQuizzes == 0){ ds = 0;} %>
-				You: <%=ds%> %
-				<p class="you" style="width: <%= ds %>%"></p>
+				You: <%=ds.toFixed(2) %>%
+				<p class="you" style="width: <%= ds.toFixed(2) %>%"></p>
 			</div>
 			<p></p>
+			<hr>
 
 
 			<strong>Databases and DBMS</strong>
 			<p></p>
 			<div class="bargraph">
-				College Topper:
-				<p class="topper" style="width: 100%"></p>
-				College Average:
-				<p class="average" style="width: 40%"></p>
+				College Topper: <%= collegeTopper.dbs.toFixed(2) %>%
+				<p class="topper" style="width: <%=collegeTopper.dbs.toFixed(2) %>%"></p>
+				College Average: <%= collegeAverage.dbs.toFixed(2) %>%
+				<p class="average" style="width: <%= collegeAverage.dbs.toFixed(2) %>%"></p>
 				<% var dbs = (user.dbs.sum/user.dbs.numberOfQuizzes * 100)%>
 				<% if(user.dbs.numberOfQuizzes == 0){ dbs = 0;} %>
-				You: <%= dbs%> %
-				<p class="you" style="width: <%= dbs %>%"></p>
+				You: <%= dbs.toFixed(2) %>%
+				<p class="you" style="width: <%= dbs.toFixed(2) %>%"></p>
 			</div>
 			<p></p>
+			<hr>
 
 
 			<strong>Networks</strong>
 			<p></p>
 			<div class="bargraph">
-				College Topper:
-				<p class="topper" style="width: 100%"></p>
-				College Average:
-				<p class="average" style="width: 40%"></p>
+				College Topper: <%= collegeTopper.nw.toFixed(2) %>%
+				<p class="topper" style="width: <%=collegeTopper.nw.toFixed(2) %>%"></p>
+				College Average: <%= collegeAverage.nw.toFixed(2) %>%
+				<p class="average" style="width: <%= collegeAverage.nw.toFixed(2) %>%"></p>
 				<% var nw = (user.nw.sum/user.nw.numberOfQuizzes * 100)%>
 				<% if(user.nw.numberOfQuizzes == 0){ nw = 0;} %>
-				You: <%= nw%> %
-				<p class="you" style="width: <%= nw %>%"></p>
+				You: <%= nw.toFixed(2) %>%
+				<p class="you" style="width: <%= nw.toFixed(2) %>%"></p>
 			</div>
 			<p></p>
+			<hr>
 
 
 			<strong>Operating Systems</strong>
 			<p></p>
 			<div class="bargraph">
-				College Topper:
-				<p class="topper" style="width: 100%"></p>
-				College Average:
-				<p class="average" style="width: 40%"></p>
+				College Topper: <%= collegeTopper.os.toFixed(2) %>%
+				<p class="topper" style="width: <%=collegeTopper.os.toFixed(2) %>%"></p>
+				College Average: <%= collegeAverage.os.toFixed(2) %>%
+				<p class="average" style="width: <%= collegeAverage.os.toFixed(2) %>%"></p>
 				<% var os = (user.os.sum/user.os.numberOfQuizzes * 100)%>
 				<% if(user.os.numberOfQuizzes == 0){ os = 0;} %>
-				You: <%= os %> %
-				<p class="you" style="width: <%= os %>%"></p>
+				You: <%= os .toFixed(2) %>%
+				<p class="you" style="width: <%= os.toFixed(2) %>%"></p>
 			</div>
 			<p></p>
+			<hr>
 
 
 			<strong>General Aptitude</strong>
 			<p></p>
 			<div class="bargraph">
-				College Topper:
-				<p class="topper" style="width: 100%"></p>
-				College Average:
-				<p class="average" style="width: 40%"></p>
+				College Topper: <%= collegeTopper.apt.toFixed(2) %>%
+				<p class="topper" style="width: <%=collegeTopper.apt.toFixed(2) %>%"></p>
+				College Average: <%= collegeAverage.apt.toFixed(2) %>%
+				<p class="average" style="width: <%= collegeAverage.apt.toFixed(2) %>%"></p>
 				<% var apt = (user.apt.sum/user.apt.numberOfQuizzes * 100)%>
 				<% if(user.apt.numberOfQuizzes == 0){ apt = 0;} %>
-				You: <%= apt %> %
-				<p class="you" style="width: <%= apt %>%"></p>
+				You: <%= apt .toFixed(2) %>%
+				<p class="you" style="width: <%= apt.toFixed(2) %>%"></p>
 			</div>
 			<p></p>
+			<hr>
 
 		<% } else { %>
 
+			<!-- Details to be displayed for support users -->
 
 			<ul class="list-group">
 				<% user.quizzes.forEach(function(quiz) { %>
-					<li class="list-group-item">
-						<div class="float-left">
-							<a href="/quiz/preview/<%= quiz.id%>">
-								<h4><%= quiz.title %></h4>
-							</a>
-						</div>
+				<li class="list-group-item">
+					<div class="float-left">
+						<a href="/quiz/preview/<%= quiz.id%>">
+							<h4><%= quiz.title %></h4>
+						</a>
+					</div>
+					<% if (!quiz.isPosted) { %>
 						<a class="btn btn-dark" href="/quiz/addQuestions/<%= quiz.id%>">
 							Edit
 						</a>
-						<% if (quiz.isPosted) { %>
-							<a class="float-right btn btn-dark" href="#">
-								View Results
-							</a>
-						<% } else { %>
-							<a class="float-right btn btn-dark" href="/user/post/<%= quiz.id %>">
-								Post
-							</a>
-						<% } %>
-					</li>
+					<% } %>
+					<% if (quiz.isPosted) { %>
+					<a class="float-right btn btn-dark" href="/quiz/viewResult/<%= quiz.id %>">
+						View Results
+					</a>
+					<% } else { %>
+					<a class="float-right btn btn-dark" href="/user/post/<%= quiz.id %>">
+						Post
+					</a>
+					<% } %>
+				</li>
 				<% }); %>
 			</ul>
 

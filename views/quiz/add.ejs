@@ -1,13 +1,29 @@
 <% include ../partials/header %>
+
+<link rel="stylesheet" type="text/css" href="/styles/landing.css">
+
 <% include ../partials/navbar %>
 <% include ../partials/alert %>
+
+<ul class="slideshow">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
+<br>
+<br>
+<br>
+
 <div class="container">
 	<form id="myForm" class="col-md-6 offset-md-3" action="/quiz/add" method="POST">
 		<legend>Add Quiz details</legend>
 		<div class="form-group">
 			<label for="title">Title</label>
 			<textarea class="form-control" id="exampleFormControlTextarea1"	type="text" name="title" rows="2" required="true"></textarea>
-		</div></br>
+		</div>
 		<div class="row">
 			<div class="form-group col-md-6">
 				<label for="category">Category</label>
@@ -22,9 +38,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
-			<button class="btn btn-info" type="submit">Add Questions</button>
-		</div>
+		<button class="btn btn-info" type="submit">Add Questions</button>
 	</form>
 </div>
 
