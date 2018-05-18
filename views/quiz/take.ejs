@@ -38,15 +38,21 @@ function shuffleArray(array) {
 				</div>
 				<div class="">
 					<% if (!preview) {%>
-					<% shuffleArray(question.options)%>
+						<% shuffleArray(question.options)%>
 					<%}%>
 					<% question.options.forEach(function(option) { %>
-					<div style="margin-top: 3px">
-						<input type="radio" id="q156" class="myRadioButton options" style="margin-left: 10px" name="<%= question.id%>" value="<%= option.option%>" > 
-						<label style="margin-left: 10px">
-							<%= option.option%> <br/>
-						</label>
-					</div>
+						<div style="margin-top: 3px">
+							<input type="radio" id="q156" class="myRadioButton options" style="margin-left: 10px" name="<%= question.id%>" value="<%= option.option%>" > 
+							<label style="margin-left: 10px">
+								<% if (option.option === question.answer) { %>
+									<span style="background-color: green;">
+										<%= option.option%> <br/>	
+									</span>
+								<% } else { %>
+									<%= option.option%> <br/>
+								<% } %>
+							</label>
+						</div>
 					<% }); %>
 				</div>
 			</div>
@@ -55,15 +61,15 @@ function shuffleArray(array) {
 			<% if (preview) {%>
 				<div class="margin-top">
 					<a href="/quiz/addQuestions/<%=currentQuiz.id%>">
-						<button class="btn btn-info float-left" type="button">Back</button>
+						<button class="btn btn-warning float-left" type="button">Back</button>
 					</a>
 					<% if (!currentQuiz.isPosted) {%>
 						<a href="/user/post/<%= currentQuiz.id%>">
-							<button class="btn btn-info float-right" type="button">Post</button>					
+							<button class="btn btn-success float-right" type="button">Post</button>					
 						</a>
 					<%}else{%>
 						<a href="#"<%= currentQuiz.id%>">
-							<button class="btn btn-info float-right" type="button">View results</button>					
+							<button class="btn btn-success float-right" type="button">View results</button>					
 						</a>
 					<%}%>
 				</div>
