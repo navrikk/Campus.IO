@@ -8,7 +8,7 @@
 		<% chats.forEach(function(chat) { %>
 			<% if (!(chat.message === '')) { %>
 				<li>
-					<pre><%= chat.message %></pre>
+					<div class="preserveFormat"><%= chat.message %></div>
 				</li>
 			<% } %>
 		<% }); %>
@@ -43,7 +43,7 @@
 			});
 			socket.on('chat message', function(chatMessage) {
 				if (chatMessage.message != '') {
-					$('#messages').append($('<li><pre>' + chatMessage.displayMessage + '</pre></li>'));
+					$('#messages').append($('<li><div class=\"preserveFormat\">' + chatMessage.displayMessage + '</pre></li>'));
 					var scrollBar = document.getElementById("messages");
 					scrollBar.scrollTop = scrollBar.scrollHeight;
 				}

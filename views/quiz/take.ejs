@@ -21,9 +21,10 @@ function shuffleArray(array) {
 		</div>
 		<% if (!preview) {%>
 			<div>
-				Time left: <span id="remainingTime"></span>
+				Time left: <span style="background-color: red;" id="remainingTime"></span>
 			</div>
 		<%}%>
+		<hr>
 		<form id="quiz" action="/quiz/take/<%=currentQuiz.id%>" method="POST">
 			<% if (!preview) {%>
 			<%shuffleArray(currentQuiz.questions)%>
@@ -31,12 +32,10 @@ function shuffleArray(array) {
 			<% currentQuiz.questions.forEach(function(question) { %>
 			<div class="input-group rounded question" >
 				<div class="input-group">
-					<p>
-						<pre><%= question.question%></pre>
-					</p>
+					<pre class="preserveFormat"><%= question.question%></pre>
 					<br/>
 				</div>
-				<div class="">
+				<div>
 					<% if (!preview) {%>
 						<% shuffleArray(question.options)%>
 					<%}%>

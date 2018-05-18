@@ -170,3 +170,9 @@ a:hover {
 	font:	inherit;
 	cursor: pointer;
 }
+
+.preserveFormat {
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+	font-family: inherit;
+}

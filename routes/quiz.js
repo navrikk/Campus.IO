@@ -10,7 +10,7 @@ router.get('/add', middleware.isLoggedIn, function(req, res) {
 	if (req.user.isSupport) {	
 		res.render('quiz/add');
 	}else{
-		req.flash('error', 'You don\'t have permission to this page');
+		req.flash('error', 'You don\'t have permission to view this page.');
 		res.redirect('/user/home');
 	}
 });
@@ -68,13 +68,13 @@ router.get('/addQuestions/:quizId', middleware.isLoggedIn, function(req, res) {
 					});
 				}
 				else{
-					req.flash('error', 'You don\'t have permission to this page');
+					req.flash('error', 'You don\'t have permission to view this page.');
 					res.redirect('/user/home');
 				}
 			}
 		});
 	}else{
-		req.flash('error', 'You don\'t have permission to this page');
+		req.flash('error', 'You don\'t have permission to view this page.');
 		res.redirect('/user/home');
 	}
 });
@@ -102,7 +102,7 @@ router.post('/addQuestions/:quizId', middleware.isLoggedIn, function(req, res) {
 			}
 			);
 	}else{
-		req.flash('error', 'You don\'t have permission to this page');
+		req.flash('error', 'You don\'t have permission to view this page.');
 		res.redirect('/user/home');
 	}			
 });
@@ -118,7 +118,7 @@ router.get('/preview/:quizId', middleware.isLoggedIn, function(req, res) {
 			}
 		});
 	}else{
-		req.flash('error', 'You don\'t have permission to this page');
+		req.flash('error', 'You don\'t have permission to view this page.');
 		res.redirect('/user/home');
 	}
 });
@@ -155,13 +155,13 @@ router.get('/take/:quizId', middleware.isLoggedIn, function(req, res) {
 					});
 				}
 				else{
-					req.flash('error', 'You have already taken quiz.');
+					req.flash('error', 'You have already taken this quiz.');
 					res.redirect('/user/home');
 				}
 			}
 		});
 	}else{
-		req.flash('error', 'You don\'t have permission to this page');
+		req.flash('error', 'You don\'t have permission to view this page.');
 		res.redirect('/user/home');
 	}	
 });
