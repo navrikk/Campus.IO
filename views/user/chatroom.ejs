@@ -30,7 +30,7 @@
 		$(() => {
 			var socket = io();
 			$('form').submit(function() {
-				var displayMessage = $('#myName').val() + ': ' + $('#myMessage').val();
+				var displayMessage = $('#myName').val() + ':\n' + $('#myMessage').val();
 				var chatMessage = {
 					author: $('#myName').val(),
 					message: $('#myMessage').val(),
