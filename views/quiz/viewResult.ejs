@@ -6,44 +6,51 @@
    return a.score - b.score;
 }); %>
 
-<div class="container">
-	<div class="backdrop myShadow">
-		<div class="table-responsive table-hover">
-		<p></p>
-		<div class="text-center">
-			<h3>
-				<%= currentQuiz.title %> - <%= currentQuiz.author.name %>
-			</h3>
-			<h5>MAXIMUM MARKS - <%= currentQuiz.questions.length %></h5>
-		</div>
-		<p></p>
-			<table class="table">
-				<thead>
-					<tr align="center">
-						<th scope="col">#</th>
-						<th scope="col">NAME</th>
-						<th scope="col">OBTAINED</th>
-						<th scope="col">%</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% var i = 1; %>
-					<% currentQuiz.takenByUsers.forEach(function(user) { %>
-					<% if (user.id.equals(currentUser._id)) { %>
-						<tr align="center" style="background-color: green;">
-					<% } else { %>		
-						<tr align="center">
-					<% } %>
-						<th scope="row"><%= i++ %></th>
-						<td><%= user.name %></td>
-						<td><%= user.score %></td>
-						<td><%= (user.score / currentQuiz.questions.length * 100).toFixed(2) + '%'%></td>
-					</tr>
-					<% }) %>
-				</tbody>
-			</table>
-		</div>
+<div class="container backdrop myShadow">
+	<div class="table-responsive table-hover">
+	<p></p>
+	<div class="text-center">
+		<h3>
+			<%= currentQuiz.title %> - <%= currentQuiz.author.name %>
+		</h3>
+		<h5>MAXIMUM MARKS - <%= currentQuiz.questions.length %></h5>
 	</div>
+	<p></p>
+		<table id="resultsTable" class="table">
+			<thead>
+				<tr align="center">
+					<th scope="col">#</th>
+					<th scope="col">NAME</th>
+					<th scope="col">OBTAINED</th>
+					<th scope="col">%</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% var i = 1; %>
+				<% currentQuiz.takenByUsers.forEach(function(user) { %>
+				<% if (user.id.equals(currentUser._id)) { %>
+					<tr align="center" style="background-color: green;">
+				<% } else { %>		
+					<tr align="center">
+				<% } %>
+					<th scope="row"><%= i++ %></th>
+					<td><%= user.name %></td>
+					<td><%= user.score %></td>
+					<td><%= (user.score / currentQuiz.questions.length * 100).toFixed(2) + '%'%></td>
+				</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
+	<div class="float-right">
+        <button class="btn btn-warning" id="btnExport" onclick="javascript:xport.toCSV('resultsTable');">
+            Download
+        </button>
+    </div>
+    <br>
+    <br>
 </div>
+
+<script src="/scripts/tableExport.js"></script>
 
 <% include ../partials/footer %>

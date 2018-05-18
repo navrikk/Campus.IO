@@ -36,10 +36,7 @@
 
 <div class="container backdrop myShadow">
     <div class="table-responsive table-hover">
-        <div class="text-center">
-            
-        </div>
-        <table class="table">
+        <table id="leaderboardTable" class="table">
             <thead>
                 <tr align="center">
                     <th scope="col">#</th>
@@ -59,6 +56,15 @@
             </tbody>
         </table>
     </div>
+    <div class="float-right">
+        <button class="btn btn-warning" id="btnExport" onclick="javascript:xport.toCSV('leaderboardTable');">
+            Download
+        </button>
+    </div>
+    <br>
+    <br>
 </div>
+
+<script src="/scripts/tableExport.js"></script>
 
 <% include ../partials/footer %>
