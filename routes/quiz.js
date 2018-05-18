@@ -175,13 +175,12 @@ router.post('/take/:quizId', middleware.isLoggedIn, function(req, res) {
 				res.redirect('/user/home');
 			}
 			else{
-				var result = 0;
+				var score = 0;
 				for (var i = 0; i < foundQuiz.questions.length; i++) {
 					if(req.body[foundQuiz.questions[i].id] === foundQuiz.questions[i].answer){
-						result++;
+						score++;
 					}
 				}
-				var score = result/foundQuiz.questions.length;
 				for (var i = 0; i < foundQuiz.takenByUsers.length; i++) {
 					if(foundQuiz.takenByUsers[i].id.equals(req.user._id)){
 						foundQuiz.takenByUsers[i].score = score;
@@ -199,20 +198,16 @@ router.post('/take/:quizId', middleware.isLoggedIn, function(req, res) {
 								req.flash('error', 'Something went wrong. Please try again.');
 								res.redirect('/user/home');
 							}
-							foundUser[foundQuiz.category].sum += score;
+							foundUser[foundQuiz.category].sum += score / foundQuiz.questions.length;
 							foundUser[foundQuiz.category].numberOfQuizzes += 1;
-							foundUser.quizzes.push({
-								id: req.params.quizId,
-								title: foundQuiz.title,
-								score: score
-							});
 							User.findByIdAndUpdate(foundUser._id, foundUser, function(err, updatedUser) {
 								if(err) {
 									req.flash('error', 'Something went wrong. Please try again.');
 									res.redirect('/user/home');
 								} else {
 									req.flash('success', 'Successfully updated.');
-									res.redirect("/quiz/viewResult/" + foundQuiz._id)								}
+									res.redirect("/quiz/viewResult/" + foundQuiz._id)
+								}
 							});
 						})
 					}

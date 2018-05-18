@@ -35,7 +35,7 @@ cloudinary.config({
 
 // render the home page
 router.get('/home', middleware.isLoggedIn, function(req, res) {
-	Quiz.find({'isPosted': true}, function(err, allQuizzes) {
+	Quiz.find({'isPosted': true}).sort({date: 'descending'}).exec(function(err, allQuizzes) {
 		if(err) {
 			req.flash('error', 'Something went wrong. Please try again.');
 		} else {
@@ -111,10 +111,34 @@ router.get('/leaderboard', middleware.isLoggedIn, function(req, res) {
             currentPoints += user.apt.sum;
             scoreBoard.push({
                 student : {
-                    name : user.firstname + user.lastname,
+                    name : user.firstname + " " + user.lastname,
                     _id : user._id
                 },
                 points : currentPoints
+            });
+        });
+        scoreBoard.sort(function(b, a){
+           return a.points - b.points;
+        });
+        res.render('user/leaderboard', {scoreBoard: scoreBoard});
+    });
+});
+
+// render the leaderboard category page
+router.get('/leaderboard/:category', middleware.isLoggedIn, function(req, res) {
+    User.find({isSupport: false}, function(err, allStudentUsers) {
+        if (err) {
+            req.flash('error', 'Something went wrong. Try again.');
+            return res.redirect('/user/home');
+        }
+        var scoreBoard = new Array();
+        allStudentUsers.forEach(function(user) {
+            scoreBoard.push({
+                student : {
+                    name : user.firstname + " " + user.lastname,
+                    _id : user._id
+                },
+                points : user[req.params.category].sum
             });
         });
         scoreBoard.sort(function(b, a){
@@ -226,14 +250,15 @@ router.get('/post/:id', middleware.isLoggedIn, function(req, res) {
 	   if (err) {
 	   		req.flash('error', 'Something went wrong. Please try again');
 	   		res.redirect('/user/home');
-	   } else {
+	   }
+	   else{
 	   		User.update({'_id': req.user._id, 'quizzes.id': req.params.id},
 	   			{'$set': {'quizzes.$.isPosted': true}}, 
 	   			function(err, updatedUser) {
 	   				if (err) {
 	   					req.flash('error', 'Something went wrong. Please try again');
 	   					res.redirect('/user/home');
-	   				} else {
+	   				}else{
 	   					req.flash('success', 'Successfully updated.');
 	   					res.redirect('/user/' + req.user._id);
 	   				}

@@ -23,7 +23,6 @@ var userSchema = new mongoose.Schema({
 			},
 			title: {type: String, required: true},
 			isPosted: {type: Boolean, default: false},
-			score : {type: Number, default: 0.0}
 	}],
 	oop: {sum: {type: Number, default: 0.0}, numberOfQuizzes: {type: Number, default:0} },
 	ds: {sum: {type: Number, default: 0.0}, numberOfQuizzes: {type: Number, default:0} },

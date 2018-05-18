@@ -20,7 +20,9 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">NAME</th>
-					<th scope="col">SCORE</th>
+					<th scope="col">MAXIMUM MARKS</th>
+					<th scope="col">OBTAINED MARKS</th>
+					<th scope="col">PERCENTAGE</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +31,9 @@
 				<tr>
 					<th scope="row"><%= i++ %></th>
 					<td><%= user.name %></td>
-					<td><%= (user.score * 100).toFixed(2) + '%'%></td>
+					<td><%= currentQuiz.questions.length %></td>
+					<td><%= user.score %></td>
+					<td><%= (user.score / currentQuiz.questions.length * 100).toFixed(2) + '%'%></td>
 				</tr>
 				<% }) %>
 			</tbody>
