@@ -2,15 +2,31 @@
 <% include ../partials/navbar %>
 <% include ../partials/alert %>
 
+<div id="categoryDiv" hidden=""><%= category %></div>
+
 <div class="container backdrop myShadow">
     <div class="btn-group btn-group-sm d-flex" role="group">
-        <a class="btn btn-outline-secondary active w-100" href="/user/leaderboard">ALL</a>
-        <a class="btn btn-outline-secondary w-100" href="/user/leaderboard/oop">OOP</a>
-        <a class="btn btn-outline-secondary w-100" href="/user/leaderboard/ds">DS</a>
-        <a class="btn btn-outline-secondary w-100" href="/user/leaderboard/dbs">DBMS</a>
-        <a class="btn btn-outline-secondary w-100" href="/user/leaderboard/nw">NW</a>
-        <a class="btn btn-outline-secondary w-100" href="/user/leaderboard/os">OS</a>
-        <a class="btn btn-outline-secondary w-100" href="/user/leaderboard/apt">APT</a>
+        <a id="all" class="btn btn-outline-secondary w-100" href="/user/leaderboard/all">
+            ALL
+        </a>
+        <a id="oop" class="btn btn-outline-secondary w-100" href="/user/leaderboard/oop">
+            OOP
+        </a>
+        <a id="ds" class="btn btn-outline-secondary w-100" href="/user/leaderboard/ds">
+            DS
+        </a>
+        <a id="dbs" class="btn btn-outline-secondary w-100" href="/user/leaderboard/dbs">
+            DBMS
+        </a>
+        <a id="nw" class="btn btn-outline-secondary w-100" href="/user/leaderboard/nw">
+            NW
+        </a>
+        <a id="os" class="btn btn-outline-secondary w-100" href="/user/leaderboard/os">
+            OS
+        </a>
+        <a id="apt" class="btn btn-outline-secondary w-100" href="/user/leaderboard/apt">
+            APT
+        </a>
     </div>
 </div>
 
@@ -20,6 +36,9 @@
 
 <div class="container backdrop myShadow">
     <div class="table-responsive table-hover">
+        <div class="text-center">
+            
+        </div>
         <table class="table">
             <thead>
                 <tr align="center">

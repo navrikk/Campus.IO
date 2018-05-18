@@ -94,7 +94,7 @@ router.get('/show', middleware.isLoggedIn, function(req, res) {
 });
 
 // render the leaderboard page
-router.get('/leaderboard', middleware.isLoggedIn, function(req, res) {
+router.get('/leaderboard/all', middleware.isLoggedIn, function(req, res) {
     User.find({isSupport: false}, function(err, allStudentUsers) {
         if (err) {
             req.flash('error', 'Something went wrong. Try again.');
@@ -120,7 +120,7 @@ router.get('/leaderboard', middleware.isLoggedIn, function(req, res) {
         scoreBoard.sort(function(b, a){
            return a.points - b.points;
         });
-        res.render('user/leaderboard', {scoreBoard: scoreBoard});
+        res.render('user/leaderboard', {scoreBoard: scoreBoard, category: 'all'});
     });
 });
 
@@ -144,7 +144,7 @@ router.get('/leaderboard/:category', middleware.isLoggedIn, function(req, res) {
         scoreBoard.sort(function(b, a){
            return a.points - b.points;
         });
-        res.render('user/leaderboard', {scoreBoard: scoreBoard});
+        res.render('user/leaderboard', {scoreBoard: scoreBoard, category: req.params.category});
     });
 });
 
