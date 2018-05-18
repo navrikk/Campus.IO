@@ -2,10 +2,16 @@ $(document).ready(function () {
 	setTimeout(function() {
 	    $(".alert").alert("close");
 	}, 3000);
-	if (document.URL.search("/user/leaderboard")) {
+	if (document.URL.search("/user/leaderboard") === 0) {
 		var button = document.getElementById(document.getElementById("categoryDiv").innerHTML);
 		button.classList.add("active");
 	}
+	$("#oopGraph").toggle();
+    $("#dsGraph").toggle();
+    $("#dbsGraph").toggle();
+    $("#nwGraph").toggle();
+    $("#osGraph").toggle();
+    $("#aptGraph").toggle();
 });
 
 $("#myMessage").keypress(function (e) {
@@ -22,4 +28,9 @@ function showSupportDetails() {
 
 function hideSupportDetails() {
 	$("#supportDetails").attr("hidden", true);
+}
+
+function toggleGraph(id) {
+	$("#" + id).toggle("slow", "swing", function() {
+	});
 }

@@ -31,7 +31,7 @@
 				<% if (currentUser) { %>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img class="rounded-circle" src="<%= currentUser.avatar %>" height="18px" width="18px"> <%= currentUser.firstname %>
+							<img id="myImage" class="rounded-circle" src="<%= currentUser.avatar %>" height="18px" width="18px"> <%= currentUser.firstname %>
 						</a>
 						<div class="dropdown-menu myShadow" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="/user/show">

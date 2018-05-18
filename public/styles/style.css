@@ -157,3 +157,16 @@ a:hover {
 #chatMessageText {
 	font-family: 'Pangolin', cursive;
 }
+
+#myImage {
+	object-fit: cover;
+}
+
+.graphSection {
+	background:	none!important;
+	color:	inherit;
+	border:	none; 
+	padding:	0!important;
+	font:	inherit;
+	cursor: pointer;
+}
