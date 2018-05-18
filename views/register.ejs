@@ -24,14 +24,14 @@
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="fname">First Name</label>
-				<input class="form-control" type="text" name="fname" placeholder="John" autofocus>
+				<input class="form-control" type="text" name="fname" placeholder="John" autofocus maxlength="20">
 				<small class="form-text text-muted">
 					This gets displayed on content.
 				</small>
 			</div>
 			<div class="form-group col-md-6">
 				<label for="lname">Last Name</label>
-				<input class="form-control" type="text" name="lname" placeholder="Smith">
+				<input class="form-control" type="text" name="lname" placeholder="Smith" maxlength="20">
 				<small class="form-text text-muted">
 					Initials or surname.
 				</small>
@@ -64,7 +64,7 @@
 		<div class="form-row">
 			<div class="form-group col-md-4">
 				<label for="username">USN or Username</label>
-				<input class="form-control" type="text" name="username">
+				<input class="form-control" type="text" name="username" maxlength="15">
 				<small class="form-text text-muted">
 					Make sure you remember it.
 				</small>
@@ -91,12 +91,12 @@
 			</div>
 			<div class="form-group col-md-6">
 				<label for="college">College</label>
-				<input class="form-control" type="text" name="college">
+				<input class="form-control" type="text" name="college" maxlength="40">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="password">Password</label>
-			<input class="form-control" type="password"	name="password">
+			<input class="form-control" type="password"	name="password" pattern=".{8,}" title="Minimum 8 characters">
 			<small class="form-text text-muted">
 				Enter a password of at least 8 characters.
 			</small>
