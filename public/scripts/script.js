@@ -2,7 +2,7 @@ $(document).ready(function () {
 	setTimeout(function() {
 	    $(".alert").alert("close");
 	}, 3000);
-	if (document.URL.search("/user/leaderboard") === 0) {
+	if (document.URL.search("/user/leaderboard")) {
 		var button = document.getElementById(document.getElementById("categoryDiv").innerHTML);
 		button.classList.add("active");
 	}
