@@ -29,7 +29,11 @@
 				<tbody>
 					<% var i = 1; %>
 					<% currentQuiz.takenByUsers.forEach(function(user) { %>
-					<tr align="center">
+					<% if (user.id.equals(currentUser._id)) { %>
+						<tr align="center" style="background-color: green;">
+					<% } else { %>		
+						<tr align="center">
+					<% } %>
 						<th scope="row"><%= i++ %></th>
 						<td><%= user.name %></td>
 						<td><%= user.score %></td>
