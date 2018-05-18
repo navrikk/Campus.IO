@@ -8,36 +8,37 @@
 
 <div class="container">
 	<div class="backdrop myShadow">
+		<div class="table-responsive table-hover">
 		<p></p>
 		<div class="text-center">
-			<h2>
+			<h3>
 				<%= currentQuiz.title %> - <%= currentQuiz.author.name %>
-			</h2>
+			</h3>
+			<h5>MAXIMUM MARKS - <%= currentQuiz.questions.length %></h5>
 		</div>
 		<p></p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">NAME</th>
-					<th scope="col">MAXIMUM MARKS</th>
-					<th scope="col">OBTAINED MARKS</th>
-					<th scope="col">PERCENTAGE</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% var i = 1; %>
-				<% currentQuiz.takenByUsers.forEach(function(user) { %>
-				<tr>
-					<th scope="row"><%= i++ %></th>
-					<td><%= user.name %></td>
-					<td><%= currentQuiz.questions.length %></td>
-					<td><%= user.score %></td>
-					<td><%= (user.score / currentQuiz.questions.length * 100).toFixed(2) + '%'%></td>
-				</tr>
-				<% }) %>
-			</tbody>
-		</table>
+			<table class="table">
+				<thead>
+					<tr align="center">
+						<th scope="col">#</th>
+						<th scope="col">NAME</th>
+						<th scope="col">OBTAINED</th>
+						<th scope="col">%</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% var i = 1; %>
+					<% currentQuiz.takenByUsers.forEach(function(user) { %>
+					<tr align="center">
+						<th scope="row"><%= i++ %></th>
+						<td><%= user.name %></td>
+						<td><%= user.score %></td>
+						<td><%= (user.score / currentQuiz.questions.length * 100).toFixed(2) + '%'%></td>
+					</tr>
+					<% }) %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 

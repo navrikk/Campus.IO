@@ -7,15 +7,17 @@
 	<ul id="messages" class="card backdrop">
 		<% chats.forEach(function(chat) { %>
 			<% if (!(chat.message === '')) { %>
-				<li><%= chat.message %></li>
+				<li>
+					<pre><%= chat.message %></pre>
+				</li>
 			<% } %>
 		<% }); %>
 	</ul>
 	<form id="messageBox" action="" method="">
 		<% if (currentUser.isSupport === true) { %>
-			<input type="text" id="myName" value="<%= currentUser.firstname %> &#9733;" hidden="">
+			<input type="text" id="myName" value="&#9733; <%= currentUser.firstname %> &#9733;" hidden="">
 		<% } else { %>
-			<input type="text" id="myName" value="<%= currentUser.firstname %>" hidden="">
+			<input type="text" id="myName" value="&#9826; <%= currentUser.firstname %> &#9826;" hidden="">
 		<% } %>
 		<textarea id="myMessage" class="col-md-10" rows="4"></textarea>
 		<button class="btn btn-info col-md-1 float-right" style="height: 102px;">Send</button>
@@ -41,7 +43,7 @@
 			});
 			socket.on('chat message', function(chatMessage) {
 				if (chatMessage.message != '') {
-					$('#messages').append($('<li>').text(chatMessage.displayMessage));
+					$('#messages').append($('<li><pre>' + chatMessage.displayMessage + '</pre></li>'));
 					var scrollBar = document.getElementById("messages");
 					scrollBar.scrollTop = scrollBar.scrollHeight;
 				}
