@@ -43,7 +43,7 @@ function shuffleArray(array) {
 						<div style="margin-top: 3px">
 							<input type="radio" id="q156" class="myRadioButton options" style="margin-left: 10px" name="<%= question.id%>" value="<%= option.option%>" > 
 							<label style="margin-left: 10px">
-								<% if (option.option === question.answer) { %>
+								<% if ((preview) && (option.option === question.answer)) { %>
 									<span style="background-color: green;">
 										<%= option.option%> <br/>	
 									</span>
