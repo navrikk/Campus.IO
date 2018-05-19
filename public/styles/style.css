@@ -176,3 +176,9 @@ a:hover {
 	overflow-wrap: break-word;
 	font-family: inherit;
 }
+
+#myTimer {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}

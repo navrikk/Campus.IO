@@ -12,6 +12,11 @@ function shuffleArray(array) {
 	}
 }
 %>
+<% if (!preview) {%>
+	<div id="myTimer">
+		Time left: <br><span style="background-color: red;" id="remainingTime"></span>
+	</div>
+<%}%>
 <div class="container">
 	<div class="backdrop myShadow">
 		<div>
@@ -19,11 +24,7 @@ function shuffleArray(array) {
 				<%= currentQuiz.title%>
 			</h1>
 		</div>
-		<% if (!preview) {%>
-			<div>
-				Time left: <span style="background-color: red;" id="remainingTime"></span>
-			</div>
-		<%}%>
+		
 		<hr>
 		<form id="quiz" action="/quiz/take/<%=currentQuiz.id%>" method="POST">
 			<% if (!preview) {%>
