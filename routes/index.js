@@ -3,6 +3,7 @@ var express		=	require('express'),
 	router		=	express.Router(),
 	passport 	= 	require('passport'),
 	User 		= 	require('../models/user'),
+	JoinCode  	=	require('../models/joinCode'),
 	async		=	require('async'),
 	nodemailer 	=	require('nodemailer'),
 	crypto 		=	require('crypto'),
@@ -37,13 +38,26 @@ router.post('/register', middleware.usernameToUpperCase, function(req, res) {
 			college: req.body.college
 		});
 	} else if (req.body.radioOption === 'support') {
+		var joinCode;
+		// retrieve join code
+		JoinCode.find({}, function(err, foundJoinCode) {
+			if (err) {
+				req.flash('error', err.message);
+				return redirect('/register');
+			}
+			if (foundJoinCode.length === 0) {
+				JoinCode.create({});
+			} else {
+				joinCode = foundJoinCode[0].code;
+			}
+		});
 		// make sure support username isn't a USN
 		if (req.body.username.match(usnPattern) || req.body.username.length === 0) {
 			req.flash('error', 'Invalid username');
 			return res.redirect('/register');
 		}
 		// make sure the join code is valid
-		if (!(req.body.joinCode === '1234567')) {
+		if (!(req.body.joinCode === joinCode)) {
 			req.flash('error', 'Wrong join code.');
 			return res.redirect('/register');
 		}
@@ -102,7 +116,7 @@ router.post('/login', middleware.usernameToUpperCase, function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) { 
 			req.flash('error', err.message);
-			return next(err); 
+			return next(err);
 		}
 		if (!user) {
 			req.flash('error', 'Invalid credentials. Try again.');
