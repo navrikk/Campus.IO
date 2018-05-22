@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#osGraph").toggle();
     $("#aptGraph").toggle();
 
-	if (document.URL.search("/user/leaderboard")) {
+	if (document.URL.search("leaderboard")) {
 		var button = document.getElementById(document.getElementById("categoryDiv").innerHTML);
 		button.classList.add("active");
 	}

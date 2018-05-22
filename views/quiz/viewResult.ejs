@@ -53,7 +53,9 @@
 
 <script src="/scripts/tableExport.js"></script>
 
-<!-- preventBack.js -->
-<script src="/scripts/preventBack.js"></script>
+<% if (!currentUser.isSupport) { %>
+	<!-- preventBack.js -->
+	<script src="/scripts/preventBack.js"></script>
+<% } %>
 
 <% include ../partials/footer %>

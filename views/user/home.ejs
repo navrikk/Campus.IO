@@ -51,7 +51,9 @@ function checkUserHasTakenQuiz(quiz) {
 					<% } else { %>
 						<div class="float-left">
 							<a href="/quiz/preview/<%= quiz._id %>">
-								<%= quiz.title %>
+								<% if (quiz.author.id.equals(currentUser._id)) { %>
+									<%= quiz.title %>
+								<% } %>
 							</a>
 						</div>
 						<div class="float-right">

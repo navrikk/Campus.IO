@@ -226,12 +226,24 @@ router.put('/:id', middleware.isLoggedIn, upload.single('image'), function(req, 
 	User.findById(req.params.id, function(err, foundUser) {
 		cloudinary.v2.uploader.destroy(foundUser.avatarId);
 	});
-	// upload image to cloudinary file storage
-	cloudinary.uploader.upload(req.file.path, function(result) {
-		// add cloudinary url for the image to the user db under avatar property
-		req.body.user.avatar = result.secure_url;
-		req.body.user.avatarId = result.public_id;
-		// search and update the respective user prifle db
+	if (req.file) {
+		// upload image to cloudinary file storage
+		cloudinary.uploader.upload(req.file.path, function(result) {
+			// add cloudinary url for the image to the user db under avatar property
+			req.body.user.avatar = result.secure_url;
+			req.body.user.avatarId = result.public_id;
+			// search and update the respective user prifle db
+			User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser) {
+				if(err) {
+					req.flash('error', 'Something went wrong. Please try again.');
+					res.redirect('/user/home');
+				} else {
+					req.flash('success', 'Successfully updated.');
+					res.redirect('/user/' + updatedUser._id);
+				}
+			});
+		});
+	} else {
 		User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser) {
 			if(err) {
 				req.flash('error', 'Something went wrong. Please try again.');
@@ -241,7 +253,7 @@ router.put('/:id', middleware.isLoggedIn, upload.single('image'), function(req, 
 				res.redirect('/user/' + updatedUser._id);
 			}
 		});
-	});
+	}
 });
 
 // handles the post method of Posts
