@@ -119,15 +119,15 @@ a:hover {
 }
 
 .bargraph p.topper {
-	background: #428bca;
+	background: #009688;
 }
 
 .bargraph p.average {
-	background: #428bca;	
+	background: #FF9800;	
 }
 
 .bargraph p.you {
-	background: #428bca;
+	background: #03A9F4;
 }
 
 #mySearch {
@@ -162,12 +162,12 @@ a:hover {
 	object-fit: cover;
 }
 
-.graphSection {
+.sectionButton {
 	background:	none!important;
 	color:	inherit;
 	border:	none; 
-	padding:	0!important;
-	font:	inherit;
+	padding: 0!important;
+	font: inherit;
 	cursor: pointer;
 }
 
@@ -181,4 +181,11 @@ a:hover {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
+}
+
+#myLink {
+	text-decoration: none;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
 }

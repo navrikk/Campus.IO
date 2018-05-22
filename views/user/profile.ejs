@@ -23,13 +23,13 @@
 
 			<!-- Details to be displayed for student profile -->
 			
-			<button class="graphSection" onclick="toggleGraph('oopGraph');">
+			<button class="sectionButton" onclick="toggleGraph('oopGraph');">
 				<strong>
 					Oject Oriented Programming <i class="fas fa-chevron-right"></i>
 				</strong>
 			</button>
 			<p></p>
-			<div id="oopGraph" class="bargraph">
+			<div id="oopGraph" class="bargraph myShadow">
 				College Topper: <%= collegeTopper.oop.toFixed(2) %>%
 				<p class="topper" style="width: <%=collegeTopper.oop.toFixed(2) %>%"></p>
 				College Average: <%= collegeAverage.oop.toFixed(2) %>%
@@ -42,15 +42,15 @@
 			<p></p>
 			<hr>
 
-			<button class="graphSection" onclick="toggleGraph('dsGraph');">
+			<button class="sectionButton" onclick="toggleGraph('dsGraph');">
 				<strong>
 					Data Structures <i class="fas fa-chevron-right"></i>
 				</strong>
 			</button>
 			<p></p>
-			<div id="dsGraph" class="bargraph">
+			<div id="dsGraph" class="bargraph myShadow">
 				College Topper: <%= collegeTopper.ds.toFixed(2) %>%
-				<p class="topper" style="width: <%=collegeTopper.ds.toFixed(2) %>%"></p>
+				<p class="topper" style="width: <%= collegeTopper.ds.toFixed(2) %>%"></p>
 				College Average: <%= collegeAverage.ds.toFixed(2) %>%
 				<p class="average" style="width: <%= collegeAverage.ds.toFixed(2) %>%"></p>
 				<% var ds = (user.ds.sum/user.ds.numberOfQuizzes * 100) %>
@@ -61,13 +61,13 @@
 			<p></p>
 			<hr>
 
-			<button class="graphSection" onclick="toggleGraph('dbsGraph');">
+			<button class="sectionButton" onclick="toggleGraph('dbsGraph');">
 				<strong>
 					Databases and DBMS <i class="fas fa-chevron-right"></i>
 				</strong>
 			</button>
 			<p></p>
-			<div id="dbsGraph" class="bargraph">
+			<div id="dbsGraph" class="bargraph myShadow">
 				College Topper: <%= collegeTopper.dbs.toFixed(2) %>%
 				<p class="topper" style="width: <%=collegeTopper.dbs.toFixed(2) %>%"></p>
 				College Average: <%= collegeAverage.dbs.toFixed(2) %>%
@@ -80,13 +80,13 @@
 			<p></p>
 			<hr>
 
-			<button class="graphSection" onclick="toggleGraph('nwGraph');">
+			<button class="sectionButton" onclick="toggleGraph('nwGraph');">
 				<strong>
 					Networks <i class="fas fa-chevron-right"></i>
 				</strong>
 			</button>
 			<p></p>
-			<div id="nwGraph" class="bargraph">
+			<div id="nwGraph" class="bargraph myShadow">
 				College Topper: <%= collegeTopper.nw.toFixed(2) %>%
 				<p class="topper" style="width: <%=collegeTopper.nw.toFixed(2) %>%"></p>
 				College Average: <%= collegeAverage.nw.toFixed(2) %>%
@@ -99,13 +99,13 @@
 			<p></p>
 			<hr>
 
-			<button class="graphSection" onclick="toggleGraph('osGraph');">
+			<button class="sectionButton" onclick="toggleGraph('osGraph');">
 				<strong>
 					Operating Systems <i class="fas fa-chevron-right"></i>
 				</strong>
 			</button>
 			<p></p>
-			<div id="osGraph" class="bargraph">
+			<div id="osGraph" class="bargraph myShadow">
 				College Topper: <%= collegeTopper.os.toFixed(2) %>%
 				<p class="topper" style="width: <%=collegeTopper.os.toFixed(2) %>%"></p>
 				College Average: <%= collegeAverage.os.toFixed(2) %>%
@@ -118,13 +118,13 @@
 			<p></p>
 			<hr>
 
-			<button class="graphSection" onclick="toggleGraph('aptGraph');">
+			<button class="sectionButton" onclick="toggleGraph('aptGraph');">
 				<strong>
 					General Aptitude <i class="fas fa-chevron-right"></i>
 				</strong>
 			</button>
 			<p></p>
-			<div id="aptGraph" class="bargraph">
+			<div id="aptGraph" class="bargraph myShadow">
 				College Topper: <%= collegeTopper.apt.toFixed(2) %>%
 				<p class="topper" style="width: <%=collegeTopper.apt.toFixed(2) %>%"></p>
 				College Average: <%= collegeAverage.apt.toFixed(2) %>%
