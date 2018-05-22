@@ -56,11 +56,13 @@
             </tbody>
         </table>
     </div>
-    <div class="float-right">
-        <button class="btn btn-warning" id="btnExport" onclick="javascript:xport.toCSV('leaderboardTable');">
-            Download
-        </button>
-    </div>
+    <% if (currentUser.isSupport) { %>
+        <div class="float-right">
+            <button class="btn btn-warning" id="btnExport" onclick="javascript:xport.toCSV('leaderboardTable');">
+                Download
+            </button>
+        </div>
+    <% } %>
     <br>
     <br>
 </div>
