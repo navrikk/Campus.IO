@@ -1,3 +1,16 @@
+// Spinner jQuery
+$(document).ready(function() {
+	//Preloader
+	$(window).on("load", function() {
+		preloaderFadeOutTime = 500;
+		function hidePreloader() {
+			var preloader = $('.spinner-wrapper');
+			preloader.fadeOut(preloaderFadeOutTime);
+		}
+		hidePreloader();
+	});
+});
+
 $(document).ready(function () {
 	setTimeout(function() {
 	    $(".alert").alert("close");
@@ -11,8 +24,10 @@ $(document).ready(function () {
     $("#aptGraph").toggle();
 
 	if (document.URL.search("leaderboard")) {
-		var button = document.getElementById(document.getElementById("categoryDiv").innerHTML);
-		button.classList.add("active");
+		if (document.getElementById("categoryDiv") !== null) {
+			var button = document.getElementById(document.getElementById("categoryDiv").innerHTML);
+			button.classList.add("active");
+		}
 	}
 });
 
@@ -45,17 +60,4 @@ $('.dropdown').on('show.bs.dropdown', function() {
 // Add slideUp animation to Bootstrap dropdown when collapsing.
 $('.dropdown').on('hide.bs.dropdown', function() {
 	$(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-});
-
-// Spinner jQuery
-$(document).ready(function() {
-	//Preloader
-	$(window).on("load", function() {
-		preloaderFadeOutTime = 500;
-		function hidePreloader() {
-			var preloader = $('.spinner-wrapper');
-			preloader.fadeOut(preloaderFadeOutTime);
-		}
-		hidePreloader();
-	});
 });
