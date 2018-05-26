@@ -20,9 +20,9 @@ function checkUserHasTakenQuiz(quiz) {
 			<p></p>
 			<hr>
 			<% if (allQuizzes.length != 0) { %>
-				Here are the quizzes posted by you
+				Here are the quizzes posted by everyone
 			<% } else { %>
-				No quizzes posted yet by you
+				No quizzes posted yet
 			<% } %>
 		<% } %>
 		<% if (!isSupport) { %>
@@ -52,7 +52,9 @@ function checkUserHasTakenQuiz(quiz) {
 						<div class="float-left">
 							<a href="/quiz/preview/<%= quiz._id %>">
 								<% if (quiz.author.id.equals(currentUser._id)) { %>
-									<%= quiz.title %>
+									<%= quiz.title %> - <br>You
+								<% } else { %>
+									<%= quiz.title %> - <br><%= quiz.author.name %>
 								<% } %>
 							</a>
 						</div>
